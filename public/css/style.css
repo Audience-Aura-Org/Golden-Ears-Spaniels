@@ -1342,9 +1342,14 @@ select.form-control {
 
 /* ── ≤ 768px : Tablet portrait ───────────────────────────────────── */
 @media (max-width: 768px) {
-  :root { --topbar-h: 0px; --nav-h: 62px; }
+  :root { --topbar-h: 30px; --nav-h: 62px; }
 
-  .topbar { display: none; }
+  /* Topbar — show slim contact strip on mobile */
+  .topbar-right    { display: none; }
+  .topbar-divider  { display: none; }
+  .topbar-items    { width: 100%; justify-content: center; gap: 22px; }
+  .topbar-item     { font-size: .72rem; }
+  .topbar-icon     { width: 11px; height: 11px; }
 
   .section { padding: 52px 0; }
 
