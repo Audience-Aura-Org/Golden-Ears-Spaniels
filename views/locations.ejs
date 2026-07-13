@@ -1,0 +1,105 @@
+<%- include('partials/head') %>
+<%- include('partials/nav') %>
+
+<!-- ─── Locations Hero ────────────────────────────────────────────── -->
+<section class="page-header" style="background-image: linear-gradient(135deg, rgba(33,23,16,.86) 0%, rgba(33,23,16,.74) 55%, rgba(74,48,32,.80) 100%), url('https://images.unsplash.com/photo-1548031611-745a4c0e6c93?w=1600&auto=format&fit=crop&q=60'); background-size: cover; background-position: center;">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Home</a><span class="breadcrumb-sep">/</span><span>Locations</span>
+    </div>
+    <p class="section-label">Nationwide Delivery</p>
+    <h1>Puppies Delivered<br>to Your Door</h1>
+    <p class="lead">Golden Ears delivers AKC Cocker Spaniel puppies safely to families across the United States and Canada. Find your nearest delivery location below.</p>
+    <div class="page-stats">
+      <div class="page-stat">
+        <span class="page-stat-num">50</span>
+        <span class="page-stat-label">US States Served</span>
+      </div>
+      <div class="page-stat">
+        <span class="page-stat-num">4</span>
+        <span class="page-stat-label">Delivery Options</span>
+      </div>
+      <div class="page-stat">
+        <span class="page-stat-num">200+</span>
+        <span class="page-stat-label">Puppies Delivered</span>
+      </div>
+      <div class="page-stat">
+        <span class="page-stat-num">2</span>
+        <span class="page-stat-label">Countries</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── City Grid ─────────────────────────────────────────────────── -->
+<section class="section" style="background:var(--white);">
+  <div class="container">
+    <p class="section-label text-center">We Serve</p>
+    <h2 class="text-center">Major Cities &amp; Regions</h2>
+    <p class="lead text-center" style="max-width:560px; margin:12px auto 0;">
+      Don't see your city? We deliver nationwide — <a href="/contact">contact us</a> and we'll arrange delivery to your door.
+    </p>
+
+    <div class="city-photo-grid">
+      <% locations.forEach(loc => { %>
+      <a href="/locations/<%= loc.slug %>" class="city-photo-card">
+        <div class="city-photo-card-bg" style="background-image: url('<%= loc.image %>')"></div>
+        <div class="city-photo-card-overlay"></div>
+        <div class="city-photo-card-body">
+          <span class="city-photo-card-tag"><%= loc.country %> &bull; <%= loc.state %></span>
+          <div class="city-photo-card-city"><%= loc.city %></div>
+          <p class="city-photo-card-desc"><%= loc.description.substring(0, 88) %>…</p>
+          <span class="city-photo-card-cta">Arrange Delivery →</span>
+        </div>
+      </a>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Delivery Options ──────────────────────────────────────────── -->
+<section class="section delivery-section">
+  <div class="container">
+    <p class="section-label text-center">Getting Your Puppy Home</p>
+    <h2 class="text-center">Flexible Delivery Options</h2>
+    <p class="lead text-center" style="max-width:540px; margin:12px auto 44px; color:rgba(255,255,255,.72);">
+      We work with every family to find the safest, most comfortable option for their new puppy.
+    </p>
+    <div class="delivery-grid">
+      <div class="delivery-card">
+        <div class="delivery-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg></div>
+        <div class="delivery-card-price">~$170</div>
+        <h4>Road Transport</h4>
+        <p>Safe regional ground delivery by our trusted transport partners.</p>
+      </div>
+      <div class="delivery-card">
+        <div class="delivery-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg></div>
+        <div class="delivery-card-price">~$250</div>
+        <h4>Air Cargo</h4>
+        <p>Airline-regulated, climate-controlled cargo delivery.</p>
+      </div>
+      <div class="delivery-card">
+        <div class="delivery-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg></div>
+        <div class="delivery-card-price">~$320</div>
+        <h4>Door-to-Door Ground</h4>
+        <p>Personalized delivery straight to your home.</p>
+      </div>
+      <div class="delivery-card">
+        <div class="delivery-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg></div>
+        <div class="delivery-card-price">~$600</div>
+        <h4>Flight Nanny</h4>
+        <p>A professional accompanies your puppy in-cabin the entire flight.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container">
+    <h2>Can't Find Your City?</h2>
+    <p>We deliver to all 50 US states and across Canada. Contact us and we'll find the perfect delivery solution for you.</p>
+    <a href="/contact" class="btn btn-primary btn-lg">Ask About Delivery</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

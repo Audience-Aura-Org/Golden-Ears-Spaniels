@@ -1,0 +1,141 @@
+<%- include('partials/head') %>
+<%- include('partials/nav') %>
+
+<section class="location-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Home</a><span class="breadcrumb-sep">/</span>
+      <a href="/locations">Locations</a><span class="breadcrumb-sep">/</span>
+      <span><%= loc.city %>, <%= loc.state %></span>
+    </div>
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:12px;">
+      <span style="font-size:2.2rem;"><%= loc.icon %></span>
+      <span class="badge"><%= loc.country %></span>
+    </div>
+    <h1>Cocker Spaniel Puppies in <%= loc.city %>, <%= loc.state %></h1>
+    <p class="lead" style="max-width:640px; margin-top:14px;"><%= loc.description %></p>
+  </div>
+</section>
+
+<!-- Hero image + delivery info -->
+<section class="section" style="background:var(--white);">
+  <div class="container">
+    <div class="split-2" style="gap:48px;">
+      <div>
+        <img
+          src="<%= loc.image %>"
+          alt="<%= loc.imageAlt %>"
+          style="width:100%; border-radius:var(--radius-xl); box-shadow:var(--shadow-lg); aspect-ratio:4/3; object-fit:cover;"
+          loading="eager"
+        >
+      </div>
+      <div>
+        <p class="section-label">Getting to <%= loc.city %></p>
+        <h2>How Your Puppy Arrives</h2>
+        <p style="color:var(--text-mid); line-height:1.8; margin:16px 0 24px; font-size:.97rem;"><%= loc.deliveryNote %></p>
+
+        <div style="background:var(--cream); border-radius:var(--radius-md); padding:20px 22px; margin-bottom:24px;">
+          <h4 style="color:var(--brown); margin-bottom:12px; font-size:1rem;">✈️ <%= loc.city %> Airports We Serve</h4>
+          <ul style="display:flex; flex-direction:column; gap:8px;">
+            <% loc.airports.forEach(airport => { %>
+            <li style="display:flex; align-items:center; gap:10px; font-size:.9rem; color:var(--text-mid);">
+              <span style="color:var(--gold);">→</span> <%= airport %>
+            </li>
+            <% }); %>
+          </ul>
+        </div>
+
+        <!-- Testimonial -->
+        <div style="background:var(--white); border:1px solid var(--cream-border); border-radius:var(--radius-md); padding:22px; box-shadow:var(--shadow-sm);">
+          <div class="stars" style="margin-bottom:10px;">
+            <% for(let i=0;i<loc.testimonial.rating;i++){%><span style="color:var(--gold); font-size:1rem;">★</span><%}%>
+          </div>
+          <p style="font-size:.9rem; color:var(--text-mid); line-height:1.7; font-style:italic; margin-bottom:12px;">"<%= loc.testimonial.text %>"</p>
+          <strong style="font-size:.85rem; color:var(--brown);">— <%= loc.testimonial.name %>, <%= loc.city %></strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Available puppies preview -->
+<section class="section" style="background:var(--cream);">
+  <div class="container">
+    <p class="section-label text-center">Ready to Come Home</p>
+    <h2 class="text-center">Available Puppies for <%= loc.city %> Families</h2>
+    <p class="lead text-center" style="max-width:500px; margin:12px auto 0;">All 9 puppies are available now and can be delivered to <%= loc.city %>.</p>
+
+    <div class="puppies-grid" style="margin-top:36px;">
+      <% allPuppies.slice(0,3).forEach(puppy => { %>
+      <div class="puppy-card">
+        <div class="puppy-card-img-wrap">
+          <img src="<%= puppy.image %>" alt="<%= puppy.name %> – <%= puppy.color %> Cocker Spaniel" loading="lazy">
+          <span class="puppy-card-status"><span class="badge">Available</span></span>
+          <span class="puppy-card-gender"><%= puppy.gender === 'Female' ? '♀ Female' : '♂ Male' %></span>
+        </div>
+        <div class="puppy-card-body">
+          <div class="puppy-card-name"><%= puppy.name %></div>
+          <div class="puppy-card-color"><%= puppy.color %></div>
+          <p class="puppy-card-desc"><%= puppy.description.substring(0,110) %>…</p>
+          <div class="puppy-card-footer">
+            <div class="puppy-price">$<%= puppy.price.toLocaleString() %><span class="puppy-price-note">+ delivery</span></div>
+            <a href="/puppies/<%= puppy.slug %>" class="btn btn-primary btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+
+    <div class="text-center" style="margin-top:32px;">
+      <a href="/available-puppies" class="btn btn-dark btn-lg">See All 9 Puppies →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Delivery options -->
+<section class="section delivery-section">
+  <div class="container">
+    <p class="section-label text-center">For <%= loc.city %> Families</p>
+    <h2 class="text-center">Delivery Options</h2>
+    <div class="delivery-grid" style="margin-top:36px;">
+      <% deliveryOptions.forEach(opt => { %>
+      <div class="delivery-card">
+        <div class="delivery-card-icon"><%- opt.icon %></div>
+        <div class="delivery-card-price"><%= opt.price %></div>
+        <h4><%= opt.title %></h4>
+        <p><%= opt.description %></p>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- Other locations -->
+<section class="section" style="background:var(--cream);">
+  <div class="container">
+    <h2 style="margin-bottom:32px;">Other Delivery Locations</h2>
+    <div class="locations-grid">
+      <% others.slice(0,3).forEach(o => { %>
+      <div class="location-card">
+        <div class="location-icon"><%= o.icon %></div>
+        <h3><%= o.city %>, <%= o.state %></h3>
+        <p><%= o.description.substring(0,100) %>…</p>
+        <a href="/locations/<%= o.slug %>" class="btn btn-secondary btn-sm">Learn More →</a>
+      </div>
+      <% }); %>
+    </div>
+    <div class="text-center" style="margin-top:28px;">
+      <a href="/locations" class="btn btn-dark">View All Locations</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container">
+    <h2>Ready to Reserve a Puppy for <%= loc.city %>?</h2>
+    <p>Reach out today — we'll guide you through the process and arrange delivery to your door.</p>
+    <a href="/contact" class="btn btn-primary btn-lg">Get in Touch</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

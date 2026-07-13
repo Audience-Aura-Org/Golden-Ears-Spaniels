@@ -1,0 +1,101 @@
+<%- include('partials/head') %>
+<%- include('partials/nav') %>
+
+<!-- ─── Puppy Detail ─────────────────────────────────────────────── -->
+<section class="detail-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="/available-puppies">Available Puppies</a>
+      <span class="breadcrumb-sep">/</span>
+      <span><%= puppy.name %></span>
+    </div>
+
+    <div class="detail-grid">
+      <!-- Image -->
+      <div>
+        <img
+          class="detail-img"
+          src="<%= puppy.image %>"
+          alt="<%= puppy.name %> – <%= puppy.color %> Cocker Spaniel Puppy"
+        >
+      </div>
+
+      <!-- Info -->
+      <div>
+        <div class="detail-badges">
+          <span class="badge">Available</span>
+          <span class="badge badge-brown"><%= puppy.gender === 'Female' ? '♀ Female' : '♂ Male' %></span>
+          <span class="badge-outline badge"><%= puppy.age %></span>
+        </div>
+
+        <div class="detail-name"><%= puppy.name %></div>
+        <div class="detail-color">American Cocker Spaniel &bull; <%= puppy.color %></div>
+
+        <div class="detail-price">$<%= puppy.price.toLocaleString() %> <span style="font-size:1rem; font-weight:400; color:var(--text-light);">+ delivery</span></div>
+
+        <p class="detail-desc"><%= puppy.description %></p>
+
+        <div class="detail-health">
+          <h4>🛡️ Health & Documentation</h4>
+          <ul>
+            <% puppy.healthGuarantees.forEach(item => { %>
+            <li><%= item %></li>
+            <% }); %>
+          </ul>
+        </div>
+
+        <div style="background:var(--cream); border-radius:var(--radius-md); padding:18px 22px; margin-bottom:24px;">
+          <h4 style="font-size:.95rem; color:var(--brown); margin-bottom:10px;">🎨 Coat Details</h4>
+          <p style="font-size:.88rem; color:var(--text-mid);"><%= puppy.markings %></p>
+        </div>
+
+        <div class="detail-actions">
+          <a href="/contact?puppy=<%= puppy.name.toUpperCase() %>" class="btn btn-primary btn-lg">
+            🐾 Inquire About <%= puppy.name %>
+          </a>
+          <a href="/available-puppies" class="btn btn-secondary">
+            ← Back to All Puppies
+          </a>
+        </div>
+
+        <p style="font-size:.78rem; color:var(--text-light); margin-top:16px; line-height:1.6;">
+          A refundable deposit of $200 holds your puppy. Full payment is due before pickup or delivery. We accept Zelle, Cash, CashApp, and bank transfer.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Delivery Info ────────────────────────────────────────────── -->
+<section class="section delivery-section">
+  <div class="container">
+    <p class="section-label text-center">Getting <%= puppy.name %> Home</p>
+    <h2 class="text-center">Delivery Options</h2>
+    <p class="lead text-center" style="max-width:560px; margin:16px auto 0; color:rgba(255,255,255,.7);">
+      We'll work with you to find the best way to get <%= puppy.name %> safely to your door.
+    </p>
+    <div class="delivery-grid">
+      <% deliveryOptions.forEach(opt => { %>
+      <div class="delivery-card">
+        <div class="delivery-card-icon"><%= opt.icon %></div>
+        <div class="delivery-card-price"><%= opt.price %></div>
+        <h4><%= opt.title %></h4>
+        <p><%= opt.description %></p>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- ─── More Puppies ─────────────────────────────────────────────── -->
+<section class="section" style="background:var(--cream);">
+  <div class="container text-center">
+    <h2>Looking for Something Different?</h2>
+    <p class="lead" style="margin:12px auto 28px; max-width:500px;">We have males and females available in multiple colors — all health-tested and ready for their new home.</p>
+    <a href="/available-puppies" class="btn btn-dark btn-lg">View All Available Puppies</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

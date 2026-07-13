@@ -1,0 +1,20 @@
+{
+  "name": "golden-ears-spaniels",
+  "version": "1.0.0",
+  "description": "Golden Ears Spaniels - AKC Cocker Spaniel Puppies for Sale",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.3.1",
+    "nodemailer": "^6.9.13"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
+}

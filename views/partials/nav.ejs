@@ -1,0 +1,72 @@
+<!-- ─── Top Bar ────────────────────────────────────────────────── -->
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="topbar-items">
+      <a href="tel:+15302080445" class="topbar-item">
+        <svg class="topbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.1 2.18a2 2 0 012-2.18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.39-1.39a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        +1 (530) 208-0445
+      </a>
+      <span class="topbar-divider">|</span>
+      <a href="mailto:info@goldenearsspaniels.com" class="topbar-item">
+        <svg class="topbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        info@goldenearsspaniels.com
+      </a>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-item topbar-hours">
+        <svg class="topbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Mon–Sun 9AM–6PM EST
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Main Nav ──────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-icon">
+          <svg viewBox="0 0 60 60" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <ellipse cx="30" cy="43" rx="16" ry="13"/>
+            <ellipse cx="13" cy="29" rx="7" ry="8" transform="rotate(-10 13 29)"/>
+            <ellipse cx="47" cy="29" rx="7" ry="8" transform="rotate(10 47 29)"/>
+            <ellipse cx="21" cy="18" rx="6" ry="7" transform="rotate(-5 21 18)"/>
+            <ellipse cx="39" cy="18" rx="6" ry="7" transform="rotate(5 39 18)"/>
+          </svg>
+        </div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">Golden Ears Spaniels</span>
+          <span class="nav-logo-tagline">AKC Cocker Spaniel Breeders</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/"                    class="<%= page==='home'      ? 'active':'' %>">Home</a></li>
+        <li><a href="/available-puppies"   class="<%= page==='puppies'   ? 'active':'' %>">Available Puppies</a></li>
+        <li><a href="/locations"           class="<%= page==='locations' ? 'active':'' %>">Locations</a></li>
+        <li><a href="/blog"                class="<%= page==='blog'      ? 'active':'' %>">Blog</a></li>
+        <li><a href="/about"               class="<%= page==='about'     ? 'active':'' %>">About</a></li>
+        <li><a href="/faq"                 class="<%= page==='faq'       ? 'active':'' %>">FAQ</a></li>
+        <li><a href="/contact"             class="<%= page==='contact'   ? 'active':'' %>">Contact</a></li>
+      </ul>
+
+      <a href="/contact" class="btn btn-primary btn-sm nav-cta">Reserve a Puppy</a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="mobile-menu">
+      <a href="/"                  class="<%= page==='home'      ? 'active':'' %>">Home</a>
+      <a href="/available-puppies" class="<%= page==='puppies'   ? 'active':'' %>">Available Puppies</a>
+      <a href="/locations"         class="<%= page==='locations' ? 'active':'' %>">Locations</a>
+      <a href="/blog"              class="<%= page==='blog'      ? 'active':'' %>">Blog</a>
+      <a href="/about"             class="<%= page==='about'     ? 'active':'' %>">About Us</a>
+      <a href="/faq"               class="<%= page==='faq'       ? 'active':'' %>">FAQ</a>
+      <a href="/contact"           class="<%= page==='contact'   ? 'active':'' %>">Contact</a>
+      <a href="/contact" class="btn btn-primary mobile-cta">Reserve a Puppy</a>
+    </nav>
+  </div>
+</nav>

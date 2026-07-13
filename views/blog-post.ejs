@@ -1,0 +1,84 @@
+<%- include('partials/head') %>
+<%- include('partials/nav') %>
+
+<section class="blog-post-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Home</a><span class="breadcrumb-sep">/</span>
+      <a href="/blog">Blog</a><span class="breadcrumb-sep">/</span>
+      <span><%= post.category %></span>
+    </div>
+    <span class="badge badge-brown"><%= post.category %></span>
+    <h1 style="margin: 14px 0 0; max-width: 820px;"><%= post.title %></h1>
+    <div class="blog-post-meta">
+      <span class="blog-date"><%= post.date %></span>
+      <span style="color:var(--cream-border);">•</span>
+      <span class="blog-date"><%= post.readTime %></span>
+      <span style="color:var(--cream-border);">•</span>
+      <span class="blog-date">By Golden Ears Spaniels</span>
+    </div>
+  </div>
+</section>
+
+<!-- Hero image -->
+<div class="container" style="margin-top: 40px;">
+  <img
+    src="<%= post.image %>"
+    alt="<%= post.imageAlt %>"
+    style="width:100%; max-height:480px; object-fit:cover; border-radius:var(--radius-xl); box-shadow:var(--shadow-lg);"
+    loading="eager"
+  >
+</div>
+
+<!-- Article body -->
+<div class="blog-post-body container">
+  <% post.content.forEach(block => { %>
+    <% if (block.type === 'p') { %>
+      <p><%= block.text %></p>
+    <% } else if (block.type === 'h2') { %>
+      <h2><%= block.text %></h2>
+    <% } else if (block.type === 'h3') { %>
+      <h3><%= block.text %></h3>
+    <% } else if (block.type === 'tip') { %>
+      <div class="blog-tip"><%= block.text %></div>
+    <% } %>
+  <% }); %>
+
+  <!-- CTA inside post -->
+  <div style="background:var(--cream); border-radius:var(--radius-lg); padding:32px; margin:40px 0; text-align:center; border:1px solid var(--cream-border);">
+    <h3 style="margin-bottom:10px;">Ready to Bring Home Your Cocker Spaniel?</h3>
+    <p style="color:var(--text-mid); font-size:.93rem; margin-bottom:22px;">We have 9 puppies available now — all AKC registered with a 2-year health guarantee.</p>
+    <a href="/available-puppies" class="btn btn-primary">Browse Available Puppies</a>
+  </div>
+</div>
+
+<!-- Related posts -->
+<% if (others.length > 0) { %>
+<section class="section" style="background:var(--cream);">
+  <div class="container">
+    <h2 style="margin-bottom:36px;">More Articles</h2>
+    <div class="blog-grid">
+      <% others.forEach(p => { %>
+      <article class="blog-card">
+        <div class="blog-card-img">
+          <a href="/blog/<%= p.slug %>">
+            <img src="<%= p.image %>" alt="<%= p.imageAlt %>" loading="lazy">
+          </a>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-meta">
+            <span class="blog-category"><%= p.category %></span>
+            <span class="blog-date"><%= p.date %></span>
+          </div>
+          <h3><a href="/blog/<%= p.slug %>"><%= p.title %></a></h3>
+          <p class="blog-excerpt"><%= p.excerpt.substring(0,110) %>…</p>
+          <a href="/blog/<%= p.slug %>" class="blog-read-more">Read Article →</a>
+        </div>
+      </article>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<%- include('partials/footer') %>

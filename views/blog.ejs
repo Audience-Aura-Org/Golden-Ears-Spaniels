@@ -1,0 +1,83 @@
+<%- include('partials/head') %>
+<%- include('partials/nav') %>
+
+<!-- ─── Blog Hero ─────────────────────────────────────────────────── -->
+<section class="page-header" style="background-image: linear-gradient(135deg, rgba(33,23,16,.86) 0%, rgba(33,23,16,.74) 55%, rgba(74,48,32,.80) 100%), url('https://images.unsplash.com/photo-1591856419156-3979c9edd30f?w=1600&auto=format&fit=crop&q=60'); background-size: cover; background-position: center;">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Home</a><span class="breadcrumb-sep">/</span><span>Blog</span>
+    </div>
+    <p class="section-label">From Our Breeders</p>
+    <h1>Cocker Spaniel Care<br>&amp; Breed Insights</h1>
+    <p class="lead">Expert advice on care, grooming, health, and everything you need to know about raising an American Cocker Spaniel.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">🐾 Care Tips</span>
+      <span class="hero-tag">✂️ Grooming</span>
+      <span class="hero-tag">🩺 Health</span>
+      <span class="hero-tag">🐶 Breed Guide</span>
+      <span class="hero-tag">🏡 New Owners</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Featured Post ─────────────────────────────────────────────── -->
+<% const featured = posts[0]; %>
+<section class="section" style="background:var(--white); padding-bottom: 0;">
+  <div class="container">
+    <span class="featured-label">★ Featured Article</span>
+    <div class="featured-post">
+      <div class="featured-post-img">
+        <a href="/blog/<%= featured.slug %>">
+          <img src="<%= featured.image %>" alt="<%= featured.imageAlt %>" loading="eager">
+        </a>
+      </div>
+      <div class="featured-post-body">
+        <div class="blog-meta">
+          <span class="blog-category"><%= featured.category %></span>
+          <span class="blog-date"><%= featured.date %> &bull; <%= featured.readTime %></span>
+        </div>
+        <h2><a href="/blog/<%= featured.slug %>"><%= featured.title %></a></h2>
+        <p class="blog-excerpt"><%= featured.excerpt %></p>
+        <a href="/blog/<%= featured.slug %>" class="btn btn-primary">Read Article →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── More Articles ─────────────────────────────────────────────── -->
+<section class="section" style="background:var(--cream);">
+  <div class="container">
+    <p class="section-label">More Articles</p>
+    <h2>Keep Reading</h2>
+    <div class="blog-grid">
+      <% posts.slice(1).forEach(post => { %>
+      <article class="blog-card">
+        <div class="blog-card-img">
+          <a href="/blog/<%= post.slug %>">
+            <img src="<%= post.image %>" alt="<%= post.imageAlt %>" loading="lazy">
+          </a>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-meta">
+            <span class="blog-category"><%= post.category %></span>
+            <span class="blog-date"><%= post.date %> &bull; <%= post.readTime %></span>
+          </div>
+          <h3><a href="/blog/<%= post.slug %>"><%= post.title %></a></h3>
+          <p class="blog-excerpt"><%= post.excerpt %></p>
+          <a href="/blog/<%= post.slug %>" class="blog-read-more">Read Article →</a>
+        </div>
+      </article>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container">
+    <h2>Ready to Meet Your Puppy?</h2>
+    <p>All our Cocker Spaniel puppies are available now. Health-tested, AKC registered, and raised with love.</p>
+    <a href="/available-puppies" class="btn btn-primary btn-lg">View Available Puppies</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

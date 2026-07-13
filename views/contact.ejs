@@ -1,0 +1,291 @@
+<%- include('partials/head') %>
+<%- include('partials/nav') %>
+
+<!-- ─── Contact Hero ─────────────────────────────────────────────── -->
+<section class="contact-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <span>Contact Us</span>
+    </div>
+    <h1>Get in Touch</h1>
+    <p class="lead">Whether you're ready to reserve a puppy or just have questions, we're here to help. We respond to every inquiry within 24 hours.</p>
+  </div>
+</section>
+
+<!-- ─── Contact Section ──────────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- Form -->
+      <div class="form-card">
+        <h2 style="margin-bottom:6px;">Send Us a Message</h2>
+        <p style="font-size:.88rem; color:var(--text-mid); margin-bottom:28px;">Fields marked with <span style="color:var(--gold-dark);">*</span> are required.</p>
+
+        <% if (success) { %>
+        <div class="alert alert-success">
+          🎉 Thank you! Your message has been sent. We'll get back to you within 24 hours. Check your inbox for a confirmation email.
+        </div>
+        <% } %>
+
+        <% if (error) { %>
+        <div class="alert alert-error">
+          ⚠️ <%= error %>
+        </div>
+        <% } %>
+
+        <% if (!success) { %>
+        <form action="/contact" method="POST" novalidate>
+
+          <!-- Name row -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name <span class="req">*</span></label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                class="form-control"
+                placeholder="Jane"
+                required
+                autocomplete="given-name"
+              >
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                class="form-control"
+                placeholder="Smith"
+                autocomplete="family-name"
+              >
+            </div>
+          </div>
+
+          <!-- Contact row -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address <span class="req">*</span></label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                placeholder="jane@email.com"
+                required
+                autocomplete="email"
+              >
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="form-control"
+                placeholder="+1 (555) 000-0000"
+                autocomplete="tel"
+              >
+            </div>
+          </div>
+
+          <!-- Location row -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city">City</label>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                class="form-control"
+                placeholder="New York"
+                autocomplete="address-level2"
+              >
+            </div>
+            <div class="form-group">
+              <label for="state">State / Province</label>
+              <select id="state" name="state" class="form-control">
+                <option value="">Select State / Province</option>
+                <optgroup label="🇺🇸 United States">
+                  <option>Alabama</option><option>Alaska</option><option>Arizona</option>
+                  <option>Arkansas</option><option>California</option><option>Colorado</option>
+                  <option>Connecticut</option><option>Delaware</option><option>Florida</option>
+                  <option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+                  <option>Illinois</option><option>Indiana</option><option>Iowa</option>
+                  <option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
+                  <option>Maine</option><option>Maryland</option><option>Massachusetts</option>
+                  <option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+                  <option>Missouri</option><option>Montana</option><option>Nebraska</option>
+                  <option>Nevada</option><option>New Hampshire</option><option>New Jersey</option>
+                  <option>New Mexico</option><option>New York</option><option>North Carolina</option>
+                  <option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+                  <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option>
+                  <option>South Carolina</option><option>South Dakota</option><option>Tennessee</option>
+                  <option>Texas</option><option>Utah</option><option>Vermont</option>
+                  <option>Virginia</option><option>Washington</option><option>West Virginia</option>
+                  <option>Wisconsin</option><option>Wyoming</option>
+                </optgroup>
+                <optgroup label="🇨🇦 Canada">
+                  <option>Alberta</option><option>British Columbia</option><option>Manitoba</option>
+                  <option>New Brunswick</option><option>Newfoundland</option><option>Nova Scotia</option>
+                  <option>Ontario</option><option>Prince Edward Island</option><option>Quebec</option>
+                  <option>Saskatchewan</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+
+          <!-- Puppy of interest -->
+          <div class="form-group">
+            <label for="puppyOfInterest">
+              Puppy of Interest <span class="req">*</span>
+              <% if (preSelected) { %>
+                <span style="font-size:.75rem; font-weight:400; color:var(--gold-dark); margin-left:6px;">(pre-selected)</span>
+              <% } %>
+            </label>
+            <select id="puppyOfInterest" name="puppyOfInterest" class="form-control" required>
+              <option value="">Select a Puppy</option>
+              <optgroup label="🎀 Female Puppies">
+                <option disabled style="font-size:.8rem; color:var(--text-light);">— Females —</option>
+                <% allPuppies.filter(p => p.gender === 'Female').forEach(p => { %>
+                <option value="<%= p.name.toUpperCase() %>" <%= preSelected === p.name.toUpperCase() ? 'selected' : '' %>>
+                  <%= p.name %> — <%= p.color %> ($<%= p.price.toLocaleString() %>)
+                </option>
+                <% }); %>
+              </optgroup>
+              <optgroup label="🐾 Male Puppies">
+                <option disabled style="font-size:.8rem; color:var(--text-light);">— Males —</option>
+                <% allPuppies.filter(p => p.gender === 'Male').forEach(p => { %>
+                <option value="<%= p.name.toUpperCase() %>" <%= preSelected === p.name.toUpperCase() ? 'selected' : '' %>>
+                  <%= p.name %> — <%= p.color %> ($<%= p.price.toLocaleString() %>)
+                </option>
+                <% }); %>
+              </optgroup>
+              <option value="General Question">General Question / Not Decided Yet</option>
+            </select>
+          </div>
+
+          <!-- How did you hear -->
+          <div class="form-group">
+            <label for="howHeard">How did you hear about us?</label>
+            <select id="howHeard" name="howHeard" class="form-control">
+              <option value="">Please select…</option>
+              <option>Google Search</option>
+              <option>Instagram</option>
+              <option>Facebook</option>
+              <option>Friend / Family Referral</option>
+              <option>AKC Marketplace</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <!-- Message -->
+          <div class="form-group">
+            <label for="message">Your Message <span class="req">*</span></label>
+            <textarea
+              id="message"
+              name="message"
+              class="form-control"
+              placeholder="Tell us a little about yourself and what you're looking for in a puppy…"
+              required
+            ></textarea>
+          </div>
+
+          <!-- Privacy note -->
+          <p style="font-size:.75rem; color:var(--text-light); margin-bottom:20px; line-height:1.6;">
+            By submitting this form, you agree that we may use your information to respond to your inquiry. We never sell or share your data. Read our privacy policy for details.
+          </p>
+
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary btn-lg">
+              🐾 Send My Inquiry
+            </button>
+          </div>
+        </form>
+        <% } %>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="contact-sidebar">
+
+        <div class="contact-info-card">
+          <h4>Contact Information</h4>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📧</div>
+            <div class="contact-info-text">
+              <strong>Email</strong>
+              <span>info@goldenearsspaniels.com</span>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📍</div>
+            <div class="contact-info-text">
+              <strong>Location</strong>
+              <span>Georgia, USA<br>Nationwide Delivery Available</span>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">⏰</div>
+            <div class="contact-info-text">
+              <strong>Response Time</strong>
+              <span>Within 24 hours, Mon–Sun</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-info-card">
+          <h4>What Happens Next?</h4>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <% [
+              {icon:'📬', title:'We receive your inquiry', desc:'Our team reviews every message within 24 hours.'},
+              {icon:'💬', title:'We reach out to you', desc:'We\'ll email or call to discuss your needs and answer questions.'},
+              {icon:'🎥', title:'Optional video call', desc:'We can schedule a video call to meet available puppies live.'},
+              {icon:'✅', title:'Reserve with deposit', desc:'A $200 refundable deposit holds your chosen puppy.'}
+            ].forEach(step => { %>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="font-size:1.4rem; flex-shrink:0; margin-top:2px;"><%= step.icon %></span>
+              <div>
+                <strong style="display:block; font-size:.88rem; color:var(--brown); margin-bottom:3px;"><%= step.title %></strong>
+                <span style="font-size:.82rem; color:var(--text-mid);"><%= step.desc %></span>
+              </div>
+            </div>
+            <% }); %>
+          </div>
+        </div>
+
+        <div class="contact-info-card" style="background:var(--brown); color:var(--white);">
+          <h4 style="color:var(--white); margin-bottom:12px;">Pricing at a Glance</h4>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; justify-content:space-between; font-size:.88rem;">
+              <span style="color:rgba(255,255,255,.7);">Females</span>
+              <strong style="color:var(--gold);">$1,100 – $1,200</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:.88rem;">
+              <span style="color:rgba(255,255,255,.7);">Males</span>
+              <strong style="color:var(--gold);">$1,000</strong>
+            </div>
+            <hr style="border-color:rgba(255,255,255,.15); margin:4px 0;">
+            <div style="display:flex; justify-content:space-between; font-size:.88rem;">
+              <span style="color:rgba(255,255,255,.7);">Road Transport</span>
+              <strong style="color:var(--gold);">~$170</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:.88rem;">
+              <span style="color:rgba(255,255,255,.7);">Flight Nanny</span>
+              <strong style="color:var(--gold);">~$600</strong>
+            </div>
+            <p style="font-size:.76rem; color:rgba(255,255,255,.5); margin-top:8px; line-height:1.6;">
+              A $200 deposit reserves your puppy. Balance due before pickup/delivery.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
