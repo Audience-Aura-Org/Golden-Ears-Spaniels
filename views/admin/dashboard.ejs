@@ -234,7 +234,7 @@
         </div>
         <div>
           <h3 class="admin-card-title">Manage Puppies</h3>
-          <p class="admin-card-desc">Update name, age, price, and availability status for each puppy</p>
+          <p class="admin-card-desc">Add, edit, change photos, or remove puppies. Changes go live instantly.</p>
         </div>
       </div>
 
@@ -244,43 +244,165 @@
         <button class="adm-puppy-tab" onclick="switchPuppyTab(this, 'tab-english')">🇬🇧 English Cocker Spaniel</button>
       </div>
 
+      <%# ── Helper macro: renders one puppy card ── %>
+      <%
+        function puppyCard(puppy) {
+      %>
+      <div class="adm-puppy-card">
+        <!-- Image (click to change) -->
+        <form action="/admin/puppies/<%= puppy.slug %>" method="POST" enctype="multipart/form-data" class="adm-puppy-form" id="form-<%= puppy.slug %>">
+          <div class="adm-img-upload-wrap" title="Click to change photo">
+            <img src="<%= puppy.image %>" alt="<%= puppy.name %>" class="adm-img-current" id="preview-<%= puppy.slug %>">
+            <div class="adm-img-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
+              <span>Change Photo</span>
+            </div>
+            <input type="file" name="image" accept="image/*" class="adm-img-file-input"
+              onchange="previewImg(this,'preview-<%= puppy.slug %>')">
+          </div>
+          <span class="adm-puppy-status-badge adm-status-<%= puppy.status.toLowerCase().replace(/\s+/g, '-') %>" style="position:relative;top:auto;right:auto;display:inline-block;margin:8px 12px 2px;"><%= puppy.status %></span>
+          <div class="adm-puppy-color"><%= puppy.color %></div>
+          <div style="padding:0 12px 14px;">
+            <div class="adm-puppy-row">
+              <div class="adm-puppy-field">
+                <label>Name</label>
+                <input type="text" name="name" value="<%= puppy.name %>" required>
+              </div>
+              <div class="adm-puppy-field">
+                <label>Age</label>
+                <input type="text" name="age" value="<%= puppy.age %>" required placeholder="11 weeks">
+              </div>
+            </div>
+            <div class="adm-puppy-row">
+              <div class="adm-puppy-field">
+                <label>Price ($)</label>
+                <input type="number" name="price" value="<%= puppy.price %>" required min="0">
+              </div>
+              <div class="adm-puppy-field">
+                <label>Status</label>
+                <select name="status">
+                  <option value="Available" <%= puppy.status === 'Available' ? 'selected' : '' %>>Available</option>
+                  <option value="Reserved"  <%= puppy.status === 'Reserved'  ? 'selected' : '' %>>Reserved</option>
+                  <option value="Sold"      <%= puppy.status === 'Sold'      ? 'selected' : '' %>>Sold</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="adm-puppy-save">Save Changes</button>
+          </div>
+        </form>
+        <!-- Delete -->
+        <form action="/admin/puppies/<%= puppy.slug %>/delete" method="POST"
+          onsubmit="return confirm('Delete <%= puppy.name %>? This cannot be undone.');"
+          style="padding:0 12px 12px;">
+          <button type="submit" class="adm-puppy-delete">Delete Puppy</button>
+        </form>
+      </div>
+      <%
+        }
+      %>
+
       <!-- American Cockers -->
       <div class="adm-puppy-panel" id="tab-american">
+
+        <!-- Add new American puppy -->
+        <button class="adm-add-toggle" onclick="toggleAddForm('add-american')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add New American Cocker Spaniel
+        </button>
+        <form id="add-american" class="adm-add-form" action="/admin/puppies/new" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="breedGroup" value="american">
+          <h4>New American Cocker Spaniel</h4>
+          <div class="adm-add-grid">
+            <div class="adm-add-field">
+              <label>Name *</label>
+              <input type="text" name="name" required placeholder="Puppy name">
+            </div>
+            <div class="adm-add-field">
+              <label>Gender *</label>
+              <select name="gender" required>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+              </select>
+            </div>
+            <div class="adm-add-field">
+              <label>Age *</label>
+              <input type="text" name="age" required placeholder="11 weeks">
+            </div>
+            <div class="adm-add-field">
+              <label>Price ($) *</label>
+              <input type="number" name="price" required min="0" placeholder="1000">
+            </div>
+            <div class="adm-add-field">
+              <label>Color *</label>
+              <input type="text" name="color" required placeholder="Golden / Apricot">
+            </div>
+            <div class="adm-add-field">
+              <label>Markings</label>
+              <input type="text" name="markings" placeholder="Silky golden ears...">
+            </div>
+            <div class="adm-add-field">
+              <label>Status</label>
+              <select name="status">
+                <option value="Available">Available</option>
+                <option value="Reserved">Reserved</option>
+                <option value="Sold">Sold</option>
+              </select>
+            </div>
+            <div class="adm-add-field">
+              <label>Photo</label>
+              <input type="file" name="image" accept="image/*"
+                onchange="previewAddImg(this,'prev-add-american')">
+              <img id="prev-add-american" class="adm-add-img-preview">
+            </div>
+            <div class="adm-add-field adm-add-field-full">
+              <label>Description</label>
+              <textarea name="description" placeholder="Puppy personality and traits..."></textarea>
+            </div>
+          </div>
+          <div class="adm-add-actions">
+            <button type="button" class="adm-add-cancel" onclick="toggleAddForm('add-american')">Cancel</button>
+            <button type="submit" class="adm-add-submit">Add Puppy</button>
+          </div>
+        </form>
+
         <div class="adm-puppy-subheading">Females</div>
         <div class="adm-puppy-grid">
           <% puppies.american.females.forEach(function(puppy) { %>
           <div class="adm-puppy-card">
-            <div class="adm-puppy-img-wrap">
-              <img src="<%= puppy.image %>" alt="<%= puppy.name %>">
-              <span class="adm-puppy-status-badge adm-status-<%= puppy.status.toLowerCase().replace(/\s+/g, '-') %>"><%= puppy.status %></span>
-            </div>
-            <div class="adm-puppy-color"><%= puppy.color %></div>
-            <form action="/admin/puppies/<%= puppy.slug %>" method="POST" class="adm-puppy-form">
-              <div class="adm-puppy-row">
-                <div class="adm-puppy-field">
-                  <label>Name</label>
-                  <input type="text" name="name" value="<%= puppy.name %>" required>
+            <form action="/admin/puppies/<%= puppy.slug %>" method="POST" enctype="multipart/form-data" class="adm-puppy-form">
+              <div class="adm-img-upload-wrap" title="Click to change photo">
+                <img src="<%= puppy.image %>" alt="<%= puppy.name %>" class="adm-img-current" id="preview-<%= puppy.slug %>">
+                <div class="adm-img-overlay">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
+                  <span>Change Photo</span>
                 </div>
-                <div class="adm-puppy-field">
-                  <label>Age</label>
-                  <input type="text" name="age" value="<%= puppy.age %>" required placeholder="11 weeks">
-                </div>
+                <input type="file" name="image" accept="image/*" class="adm-img-file-input"
+                  onchange="previewImg(this,'preview-<%= puppy.slug %>')">
               </div>
-              <div class="adm-puppy-row">
-                <div class="adm-puppy-field">
-                  <label>Price ($)</label>
-                  <input type="number" name="price" value="<%= puppy.price %>" required min="0">
+              <span class="adm-puppy-status-badge adm-status-<%= puppy.status.toLowerCase().replace(/\s+/g, '-') %>" style="position:relative;top:auto;right:auto;display:inline-block;margin:8px 12px 2px;"><%= puppy.status %></span>
+              <div class="adm-puppy-color"><%= puppy.color %></div>
+              <div style="padding:0 12px 14px;">
+                <div class="adm-puppy-row">
+                  <div class="adm-puppy-field"><label>Name</label><input type="text" name="name" value="<%= puppy.name %>" required></div>
+                  <div class="adm-puppy-field"><label>Age</label><input type="text" name="age" value="<%= puppy.age %>" required></div>
                 </div>
-                <div class="adm-puppy-field">
-                  <label>Status</label>
-                  <select name="status">
-                    <option value="Available" <%= puppy.status === 'Available' ? 'selected' : '' %>>Available</option>
-                    <option value="Reserved" <%= puppy.status === 'Reserved' ? 'selected' : '' %>>Reserved</option>
-                    <option value="Sold" <%= puppy.status === 'Sold' ? 'selected' : '' %>>Sold</option>
-                  </select>
+                <div class="adm-puppy-row">
+                  <div class="adm-puppy-field"><label>Price ($)</label><input type="number" name="price" value="<%= puppy.price %>" required min="0"></div>
+                  <div class="adm-puppy-field"><label>Status</label>
+                    <select name="status">
+                      <option value="Available" <%= puppy.status==='Available'?'selected':'' %>>Available</option>
+                      <option value="Reserved"  <%= puppy.status==='Reserved' ?'selected':'' %>>Reserved</option>
+                      <option value="Sold"      <%= puppy.status==='Sold'     ?'selected':'' %>>Sold</option>
+                    </select>
+                  </div>
                 </div>
+                <button type="submit" class="adm-puppy-save">Save Changes</button>
               </div>
-              <button type="submit" class="adm-puppy-save">Save Changes</button>
+            </form>
+            <form action="/admin/puppies/<%= puppy.slug %>/delete" method="POST"
+              onsubmit="return confirm('Delete <%= puppy.name %>? This cannot be undone.');"
+              style="padding:0 12px 12px;">
+              <button type="submit" class="adm-puppy-delete">Delete Puppy</button>
             </form>
           </div>
           <% }); %>
@@ -290,37 +412,40 @@
         <div class="adm-puppy-grid">
           <% puppies.american.males.forEach(function(puppy) { %>
           <div class="adm-puppy-card">
-            <div class="adm-puppy-img-wrap">
-              <img src="<%= puppy.image %>" alt="<%= puppy.name %>">
-              <span class="adm-puppy-status-badge adm-status-<%= puppy.status.toLowerCase().replace(/\s+/g, '-') %>"><%= puppy.status %></span>
-            </div>
-            <div class="adm-puppy-color"><%= puppy.color %></div>
-            <form action="/admin/puppies/<%= puppy.slug %>" method="POST" class="adm-puppy-form">
-              <div class="adm-puppy-row">
-                <div class="adm-puppy-field">
-                  <label>Name</label>
-                  <input type="text" name="name" value="<%= puppy.name %>" required>
+            <form action="/admin/puppies/<%= puppy.slug %>" method="POST" enctype="multipart/form-data" class="adm-puppy-form">
+              <div class="adm-img-upload-wrap" title="Click to change photo">
+                <img src="<%= puppy.image %>" alt="<%= puppy.name %>" class="adm-img-current" id="preview-<%= puppy.slug %>">
+                <div class="adm-img-overlay">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
+                  <span>Change Photo</span>
                 </div>
-                <div class="adm-puppy-field">
-                  <label>Age</label>
-                  <input type="text" name="age" value="<%= puppy.age %>" required placeholder="11 weeks">
-                </div>
+                <input type="file" name="image" accept="image/*" class="adm-img-file-input"
+                  onchange="previewImg(this,'preview-<%= puppy.slug %>')">
               </div>
-              <div class="adm-puppy-row">
-                <div class="adm-puppy-field">
-                  <label>Price ($)</label>
-                  <input type="number" name="price" value="<%= puppy.price %>" required min="0">
+              <span class="adm-puppy-status-badge adm-status-<%= puppy.status.toLowerCase().replace(/\s+/g, '-') %>" style="position:relative;top:auto;right:auto;display:inline-block;margin:8px 12px 2px;"><%= puppy.status %></span>
+              <div class="adm-puppy-color"><%= puppy.color %></div>
+              <div style="padding:0 12px 14px;">
+                <div class="adm-puppy-row">
+                  <div class="adm-puppy-field"><label>Name</label><input type="text" name="name" value="<%= puppy.name %>" required></div>
+                  <div class="adm-puppy-field"><label>Age</label><input type="text" name="age" value="<%= puppy.age %>" required></div>
                 </div>
-                <div class="adm-puppy-field">
-                  <label>Status</label>
-                  <select name="status">
-                    <option value="Available" <%= puppy.status === 'Available' ? 'selected' : '' %>>Available</option>
-                    <option value="Reserved" <%= puppy.status === 'Reserved' ? 'selected' : '' %>>Reserved</option>
-                    <option value="Sold" <%= puppy.status === 'Sold' ? 'selected' : '' %>>Sold</option>
-                  </select>
+                <div class="adm-puppy-row">
+                  <div class="adm-puppy-field"><label>Price ($)</label><input type="number" name="price" value="<%= puppy.price %>" required min="0"></div>
+                  <div class="adm-puppy-field"><label>Status</label>
+                    <select name="status">
+                      <option value="Available" <%= puppy.status==='Available'?'selected':'' %>>Available</option>
+                      <option value="Reserved"  <%= puppy.status==='Reserved' ?'selected':'' %>>Reserved</option>
+                      <option value="Sold"      <%= puppy.status==='Sold'     ?'selected':'' %>>Sold</option>
+                    </select>
+                  </div>
                 </div>
+                <button type="submit" class="adm-puppy-save">Save Changes</button>
               </div>
-              <button type="submit" class="adm-puppy-save">Save Changes</button>
+            </form>
+            <form action="/admin/puppies/<%= puppy.slug %>/delete" method="POST"
+              onsubmit="return confirm('Delete <%= puppy.name %>? This cannot be undone.');"
+              style="padding:0 12px 12px;">
+              <button type="submit" class="adm-puppy-delete">Delete Puppy</button>
             </form>
           </div>
           <% }); %>
@@ -329,41 +454,106 @@
 
       <!-- English Cockers -->
       <div class="adm-puppy-panel" id="tab-english" style="display:none;">
+
+        <!-- Add new English puppy -->
+        <button class="adm-add-toggle" onclick="toggleAddForm('add-english')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add New English Cocker Spaniel
+        </button>
+        <form id="add-english" class="adm-add-form" action="/admin/puppies/new" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="breedGroup" value="english">
+          <h4>New English Cocker Spaniel</h4>
+          <div class="adm-add-grid">
+            <div class="adm-add-field">
+              <label>Name *</label>
+              <input type="text" name="name" required placeholder="Puppy name">
+            </div>
+            <div class="adm-add-field">
+              <label>Gender *</label>
+              <select name="gender" required>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+              </select>
+            </div>
+            <div class="adm-add-field">
+              <label>Age *</label>
+              <input type="text" name="age" required placeholder="10 weeks">
+            </div>
+            <div class="adm-add-field">
+              <label>Price ($) *</label>
+              <input type="number" name="price" required min="0" placeholder="1400">
+            </div>
+            <div class="adm-add-field">
+              <label>Color *</label>
+              <input type="text" name="color" required placeholder="Golden Roan">
+            </div>
+            <div class="adm-add-field">
+              <label>Markings</label>
+              <input type="text" name="markings" placeholder="Warm golden-roan coat...">
+            </div>
+            <div class="adm-add-field">
+              <label>Status</label>
+              <select name="status">
+                <option value="Available">Available</option>
+                <option value="Reserved">Reserved</option>
+                <option value="Sold">Sold</option>
+              </select>
+            </div>
+            <div class="adm-add-field">
+              <label>Photo</label>
+              <input type="file" name="image" accept="image/*"
+                onchange="previewAddImg(this,'prev-add-english')">
+              <img id="prev-add-english" class="adm-add-img-preview">
+            </div>
+            <div class="adm-add-field adm-add-field-full">
+              <label>Description</label>
+              <textarea name="description" placeholder="Puppy personality and traits..."></textarea>
+            </div>
+          </div>
+          <div class="adm-add-actions">
+            <button type="button" class="adm-add-cancel" onclick="toggleAddForm('add-english')">Cancel</button>
+            <button type="submit" class="adm-add-submit">Add Puppy</button>
+          </div>
+        </form>
+
         <div class="adm-puppy-subheading">Females</div>
         <div class="adm-puppy-grid">
           <% puppies.english.females.forEach(function(puppy) { %>
           <div class="adm-puppy-card">
-            <div class="adm-puppy-img-wrap">
-              <img src="<%= puppy.image %>" alt="<%= puppy.name %>">
-              <span class="adm-puppy-status-badge adm-status-<%= puppy.status.toLowerCase().replace(/\s+/g, '-') %>"><%= puppy.status %></span>
-            </div>
-            <div class="adm-puppy-color"><%= puppy.color %></div>
-            <form action="/admin/puppies/<%= puppy.slug %>" method="POST" class="adm-puppy-form">
-              <div class="adm-puppy-row">
-                <div class="adm-puppy-field">
-                  <label>Name</label>
-                  <input type="text" name="name" value="<%= puppy.name %>" required>
+            <form action="/admin/puppies/<%= puppy.slug %>" method="POST" enctype="multipart/form-data" class="adm-puppy-form">
+              <div class="adm-img-upload-wrap" title="Click to change photo">
+                <img src="<%= puppy.image %>" alt="<%= puppy.name %>" class="adm-img-current" id="preview-<%= puppy.slug %>">
+                <div class="adm-img-overlay">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
+                  <span>Change Photo</span>
                 </div>
-                <div class="adm-puppy-field">
-                  <label>Age</label>
-                  <input type="text" name="age" value="<%= puppy.age %>" required placeholder="10 weeks">
-                </div>
+                <input type="file" name="image" accept="image/*" class="adm-img-file-input"
+                  onchange="previewImg(this,'preview-<%= puppy.slug %>')">
               </div>
-              <div class="adm-puppy-row">
-                <div class="adm-puppy-field">
-                  <label>Price ($)</label>
-                  <input type="number" name="price" value="<%= puppy.price %>" required min="0">
+              <span class="adm-puppy-status-badge adm-status-<%= puppy.status.toLowerCase().replace(/\s+/g, '-') %>" style="position:relative;top:auto;right:auto;display:inline-block;margin:8px 12px 2px;"><%= puppy.status %></span>
+              <div class="adm-puppy-color"><%= puppy.color %></div>
+              <div style="padding:0 12px 14px;">
+                <div class="adm-puppy-row">
+                  <div class="adm-puppy-field"><label>Name</label><input type="text" name="name" value="<%= puppy.name %>" required></div>
+                  <div class="adm-puppy-field"><label>Age</label><input type="text" name="age" value="<%= puppy.age %>" required></div>
                 </div>
-                <div class="adm-puppy-field">
-                  <label>Status</label>
-                  <select name="status">
-                    <option value="Available" <%= puppy.status === 'Available' ? 'selected' : '' %>>Available</option>
-                    <option value="Reserved" <%= puppy.status === 'Reserved' ? 'selected' : '' %>>Reserved</option>
-                    <option value="Sold" <%= puppy.status === 'Sold' ? 'selected' : '' %>>Sold</option>
-                  </select>
+                <div class="adm-puppy-row">
+                  <div class="adm-puppy-field"><label>Price ($)</label><input type="number" name="price" value="<%= puppy.price %>" required min="0"></div>
+                  <div class="adm-puppy-field"><label>Status</label>
+                    <select name="status">
+                      <option value="Available" <%= puppy.status==='Available'?'selected':'' %>>Available</option>
+                      <option value="Reserved"  <%= puppy.status==='Reserved' ?'selected':'' %>>Reserved</option>
+                      <option value="Sold"      <%= puppy.status==='Sold'     ?'selected':'' %>>Sold</option>
+                    </select>
+                  </div>
                 </div>
+                <button type="submit" class="adm-puppy-save">Save Changes</button>
               </div>
-              <button type="submit" class="adm-puppy-save">Save Changes</button>
+            </form>
+            <form action="/admin/puppies/<%= puppy.slug %>/delete" method="POST"
+              onsubmit="return confirm('Delete <%= puppy.name %>? This cannot be undone.');"
+              style="padding:0 12px 12px;">
+              <button type="submit" class="adm-puppy-delete">Delete Puppy</button>
             </form>
           </div>
           <% }); %>
@@ -373,37 +563,40 @@
         <div class="adm-puppy-grid">
           <% puppies.english.males.forEach(function(puppy) { %>
           <div class="adm-puppy-card">
-            <div class="adm-puppy-img-wrap">
-              <img src="<%= puppy.image %>" alt="<%= puppy.name %>">
-              <span class="adm-puppy-status-badge adm-status-<%= puppy.status.toLowerCase().replace(/\s+/g, '-') %>"><%= puppy.status %></span>
-            </div>
-            <div class="adm-puppy-color"><%= puppy.color %></div>
-            <form action="/admin/puppies/<%= puppy.slug %>" method="POST" class="adm-puppy-form">
-              <div class="adm-puppy-row">
-                <div class="adm-puppy-field">
-                  <label>Name</label>
-                  <input type="text" name="name" value="<%= puppy.name %>" required>
+            <form action="/admin/puppies/<%= puppy.slug %>" method="POST" enctype="multipart/form-data" class="adm-puppy-form">
+              <div class="adm-img-upload-wrap" title="Click to change photo">
+                <img src="<%= puppy.image %>" alt="<%= puppy.name %>" class="adm-img-current" id="preview-<%= puppy.slug %>">
+                <div class="adm-img-overlay">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
+                  <span>Change Photo</span>
                 </div>
-                <div class="adm-puppy-field">
-                  <label>Age</label>
-                  <input type="text" name="age" value="<%= puppy.age %>" required placeholder="10 weeks">
-                </div>
+                <input type="file" name="image" accept="image/*" class="adm-img-file-input"
+                  onchange="previewImg(this,'preview-<%= puppy.slug %>')">
               </div>
-              <div class="adm-puppy-row">
-                <div class="adm-puppy-field">
-                  <label>Price ($)</label>
-                  <input type="number" name="price" value="<%= puppy.price %>" required min="0">
+              <span class="adm-puppy-status-badge adm-status-<%= puppy.status.toLowerCase().replace(/\s+/g, '-') %>" style="position:relative;top:auto;right:auto;display:inline-block;margin:8px 12px 2px;"><%= puppy.status %></span>
+              <div class="adm-puppy-color"><%= puppy.color %></div>
+              <div style="padding:0 12px 14px;">
+                <div class="adm-puppy-row">
+                  <div class="adm-puppy-field"><label>Name</label><input type="text" name="name" value="<%= puppy.name %>" required></div>
+                  <div class="adm-puppy-field"><label>Age</label><input type="text" name="age" value="<%= puppy.age %>" required></div>
                 </div>
-                <div class="adm-puppy-field">
-                  <label>Status</label>
-                  <select name="status">
-                    <option value="Available" <%= puppy.status === 'Available' ? 'selected' : '' %>>Available</option>
-                    <option value="Reserved" <%= puppy.status === 'Reserved' ? 'selected' : '' %>>Reserved</option>
-                    <option value="Sold" <%= puppy.status === 'Sold' ? 'selected' : '' %>>Sold</option>
-                  </select>
+                <div class="adm-puppy-row">
+                  <div class="adm-puppy-field"><label>Price ($)</label><input type="number" name="price" value="<%= puppy.price %>" required min="0"></div>
+                  <div class="adm-puppy-field"><label>Status</label>
+                    <select name="status">
+                      <option value="Available" <%= puppy.status==='Available'?'selected':'' %>>Available</option>
+                      <option value="Reserved"  <%= puppy.status==='Reserved' ?'selected':'' %>>Reserved</option>
+                      <option value="Sold"      <%= puppy.status==='Sold'     ?'selected':'' %>>Sold</option>
+                    </select>
+                  </div>
                 </div>
+                <button type="submit" class="adm-puppy-save">Save Changes</button>
               </div>
-              <button type="submit" class="adm-puppy-save">Save Changes</button>
+            </form>
+            <form action="/admin/puppies/<%= puppy.slug %>/delete" method="POST"
+              onsubmit="return confirm('Delete <%= puppy.name %>? This cannot be undone.');"
+              style="padding:0 12px 12px;">
+              <button type="submit" class="adm-puppy-delete">Delete Puppy</button>
             </form>
           </div>
           <% }); %>
@@ -475,6 +668,31 @@
     document.querySelectorAll('.adm-puppy-panel').forEach(p => p.style.display = 'none');
     btn.classList.add('active');
     document.getElementById(panelId).style.display = 'block';
+  }
+
+  // Live photo preview when changing an existing puppy's image
+  function previewImg(input, imgId) {
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = e => document.getElementById(imgId).src = e.target.result;
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  // Live photo preview for the Add New Puppy form
+  function previewAddImg(input, imgId) {
+    const el = document.getElementById(imgId);
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = e => { el.src = e.target.result; el.style.display = 'block'; };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  // Toggle the Add New Puppy form open/closed
+  function toggleAddForm(formId) {
+    const el = document.getElementById(formId);
+    el.classList.toggle('open');
   }
 
   // Highlight active sidebar nav item based on scroll

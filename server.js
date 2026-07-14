@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 const rateLimit = require('express-rate-limit');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
+const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
@@ -30,6 +31,20 @@ function savePuppies(p) {
 
 // ─── Puppy Data (loaded from data/puppies.json) ────────────────────────────────
 // Use loadPuppies() in each route to always get the latest data.
+
+// ─── Image Upload (multer) ─────────────────────────────────────────────────────
+const imgStorage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, path.join(__dirname, 'image')),
+  filename:    (req, file, cb) => cb(null, 'puppy-' + Date.now() + path.extname(file.originalname)),
+});
+const upload = multer({
+  storage: imgStorage,
+  limits: { fileSize: 8 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith('image/')) cb(null, true);
+    else cb(new Error('Images only'));
+  },
+});
 
 const deliveryOptions = [
   {
@@ -791,8 +806,47 @@ app.post('/admin/settings/site', requireAdmin, (req, res) => {
   res.redirect('/admin/dashboard?saved=site');
 });
 
-// Update puppy details
-app.post('/admin/puppies/:slug', requireAdmin, (req, res) => {
+// Add new puppy
+app.post('/admin/puppies/new', requireAdmin, upload.single('image'), (req, res) => {
+  const { name, breedGroup, gender, age, price, color, markings, description, status } = req.body;
+  const p = loadPuppies();
+  const slug = (breedGroup === 'english' ? 'eng-' : '') +
+    name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') +
+    '-' + Date.now();
+  const breed      = breedGroup === 'english' ? 'English Cocker Spaniel' : 'American Cocker Spaniel';
+  const healthGuar = breedGroup === 'english'
+    ? ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date']
+    : ['2-year health guarantee', 'Genetic health screening', 'Eye & hip clearances', 'AKC Registration provided', 'Vaccinations & deworming up to date'];
+  const newPuppy = {
+    name, slug, breed, gender, age,
+    price: parseFloat(price) || 0,
+    color: color || '',
+    markings: markings || '',
+    status: status || 'Available',
+    description: description || '',
+    image: req.file ? '/image/' + req.file.filename : '/image/placeholder.jpg',
+    healthGuarantees: healthGuar,
+  };
+  const gKey = gender === 'Female' ? 'females' : 'males';
+  p[breedGroup][gKey].push(newPuppy);
+  savePuppies(p);
+  res.redirect('/admin/dashboard?saved=puppies');
+});
+
+// Delete puppy
+app.post('/admin/puppies/:slug/delete', requireAdmin, (req, res) => {
+  const p = loadPuppies();
+  ['american', 'english'].forEach(breed => {
+    ['females', 'males'].forEach(gender => {
+      p[breed][gender] = p[breed][gender].filter(x => x.slug !== req.params.slug);
+    });
+  });
+  savePuppies(p);
+  res.redirect('/admin/dashboard?saved=puppies');
+});
+
+// Update puppy details (with optional image)
+app.post('/admin/puppies/:slug', requireAdmin, upload.single('image'), (req, res) => {
   const { name, age, price, status } = req.body;
   const p = loadPuppies();
   ['american', 'english'].forEach(breed => {
@@ -803,6 +857,9 @@ app.post('/admin/puppies/:slug', requireAdmin, (req, res) => {
         p[breed][gender][idx].age    = age;
         p[breed][gender][idx].price  = parseFloat(price) || p[breed][gender][idx].price;
         p[breed][gender][idx].status = status;
+        if (req.file) {
+          p[breed][gender][idx].image = '/image/' + req.file.filename;
+        }
       }
     });
   });
