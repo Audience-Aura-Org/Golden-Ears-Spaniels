@@ -146,6 +146,126 @@ const puppies = {
   ],
 };
 
+// ─── English Cocker Spaniel Data ───────────────────────────────────────────────
+const englishPuppies = {
+  females: [
+    {
+      name: 'Rosie',
+      slug: 'eng-rosie',
+      breed: 'English Cocker Spaniel',
+      gender: 'Female',
+      age: '10 weeks',
+      price: 1500,
+      color: 'Golden Roan',
+      markings: 'Warm golden-roan coat with silky feathering',
+      status: 'Available',
+      description: 'Rosie is a gorgeous golden roan English Cocker Spaniel with a gentle, playful temperament. She is wonderfully people-oriented and has been raised around children and other dogs from birth.',
+      image: '/image/english/128638598_172383021247126_6434154303201331941_n.jpg',
+      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
+    },
+    {
+      name: 'Belle',
+      slug: 'eng-belle',
+      breed: 'English Cocker Spaniel',
+      gender: 'Female',
+      age: '10 weeks',
+      price: 1500,
+      color: 'Liver Roan',
+      markings: 'Rich liver-roan coat with classic ticking',
+      status: 'Available',
+      description: 'Belle is a beautiful liver roan with an affectionate, sweet-natured personality. Curious and bright, she adapts well to both active and relaxed family environments.',
+      image: '/image/english/128661822_172386964580065_4439681651288156166_n.jpg',
+      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
+    },
+    {
+      name: 'Hazel',
+      slug: 'eng-hazel',
+      breed: 'English Cocker Spaniel',
+      gender: 'Female',
+      age: '10 weeks',
+      price: 1600,
+      color: 'Blue Roan',
+      markings: 'Stunning blue-roan pattern with white highlights',
+      status: 'Available',
+      description: 'Hazel is an elegant blue roan English Cocker with a lively, intelligent character. She loves to play and explore, and her bright eyes and expressive ears make her irresistible.',
+      image: '/image/english/468450603_543059511839019_457076069822272934_n.jpg',
+      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
+    },
+    {
+      name: 'Ivy',
+      slug: 'eng-ivy',
+      breed: 'English Cocker Spaniel',
+      gender: 'Female',
+      age: '10 weeks',
+      price: 1500,
+      color: 'Orange & White Parti',
+      markings: 'Vivid orange-and-white parti-color with rich feathering',
+      status: 'Available',
+      description: 'Ivy is a vibrant, confident English Cocker Spaniel who loves attention. Her bold orange and white coloring is matched by her bold, outgoing personality — perfect for active families.',
+      image: '/image/english/468562312_543059475172356_8228847003937871735_n.jpg',
+      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
+    },
+  ],
+  males: [
+    {
+      name: 'Archer',
+      slug: 'eng-archer',
+      breed: 'English Cocker Spaniel',
+      gender: 'Male',
+      age: '10 weeks',
+      price: 1400,
+      color: 'Chocolate Roan',
+      markings: 'Deep chocolate roan with a velvety finish',
+      status: 'Available',
+      description: 'Archer is a handsome chocolate roan English Cocker with a loyal, energetic nature. He is smart, easy to train, and thrives on human companionship — a true working-dog heart in a family dog\'s body.',
+      image: '/image/english/468622908_543059735172330_6867141641617910209_n.jpg',
+      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
+    },
+    {
+      name: 'Chester',
+      slug: 'eng-chester',
+      breed: 'English Cocker Spaniel',
+      gender: 'Male',
+      age: '10 weeks',
+      price: 1400,
+      color: 'Black & White Parti',
+      markings: 'Classic black and white with ticked markings',
+      status: 'Available',
+      description: 'Chester is a striking black and white English Cocker full of character. Playful, gentle, and endlessly curious, he settles quickly into family life and loves being part of every activity.',
+      image: '/image/english/738217241_122101509291383762_818339417093454236_n.jpg',
+      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
+    },
+    {
+      name: 'Jasper',
+      slug: 'eng-jasper',
+      breed: 'English Cocker Spaniel',
+      gender: 'Male',
+      age: '10 weeks',
+      price: 1450,
+      color: 'Lemon Roan',
+      markings: 'Pale lemon roan with delicate ticking',
+      status: 'Available',
+      description: 'Jasper is a rare and beautiful lemon roan English Cocker with a calm, steady temperament. Loving and obedient, he is ideal for first-time spaniel owners wanting a devoted companion.',
+      image: '/image/english/738616351_122101561263383762_5078710868062250840_n.jpg',
+      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
+    },
+    {
+      name: 'Rufus',
+      slug: 'eng-rufus',
+      breed: 'English Cocker Spaniel',
+      gender: 'Male',
+      age: '10 weeks',
+      price: 1400,
+      color: 'Red / Golden Solid',
+      markings: 'Rich solid red-golden coat with cream undertones',
+      status: 'Available',
+      description: 'Rufus is a solid golden-red English Cocker with a warm, affectionate soul. He is enthusiastic, tail-wagging happy, and bonds quickly — the kind of dog that becomes the heart of the home.',
+      image: '/image/english/739470717_122108294793322919_6556678765807789416_n.jpg',
+      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
+    },
+  ],
+};
+
 const deliveryOptions = [
   {
     title: 'Road Transport',
@@ -577,19 +697,35 @@ app.get('/', (req, res) => {
 app.get('/available-puppies', (req, res) => {
   res.render('puppies', {
     page: 'puppies',
-    title: 'Available Cocker Spaniel Puppies | Golden Ears Spaniels',
-    description: 'Browse our available AKC Cocker Spaniel puppies. Males and females, multiple colors, all health-tested with a 2-year guarantee.',
+    title: 'Available American Cocker Spaniel Puppies | Golden Ears Spaniels',
+    description: 'Browse our available AKC American Cocker Spaniel puppies. Males and females, multiple colors, all health-tested with a 2-year guarantee.',
     females: puppies.females,
     males: puppies.males,
   });
 });
 
+app.get('/available-puppies/english-cocker-spaniel', (req, res) => {
+  res.render('english-puppies', {
+    page: 'puppies',
+    title: 'Available English Cocker Spaniel Puppies | Golden Ears Spaniels',
+    description: 'Browse our available English Cocker Spaniel puppies. Stunning roan and parti-color coats, health-tested and KC registered, delivered across the USA, Canada & UK.',
+    females: englishPuppies.females,
+    males: englishPuppies.males,
+  });
+});
+
 app.get('/puppies/:slug', (req, res) => {
-  const all = [...puppies.females, ...puppies.males];
-  const puppy = all.find(p => p.slug === req.params.slug);
+  const allAmerican = [...puppies.females, ...puppies.males];
+  const allEnglish  = [...englishPuppies.females, ...englishPuppies.males];
+  const puppy = allAmerican.find(p => p.slug === req.params.slug)
+             || allEnglish.find(p => p.slug === req.params.slug);
+  const backUrl = allEnglish.find(p => p.slug === req.params.slug)
+    ? '/available-puppies/english-cocker-spaniel'
+    : '/available-puppies';
   if (!puppy) return res.redirect('/available-puppies');
   res.render('puppy-detail', {
     page: 'puppies',
+    backUrl,
     title: `${puppy.name} – ${puppy.color} Cocker Spaniel Puppy | Golden Ears Spaniels`,
     description: puppy.description,
     puppy,

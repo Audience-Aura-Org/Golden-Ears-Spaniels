@@ -43,7 +43,32 @@
 
       <ul class="nav-links">
         <li><a href="/"                    class="<%= page==='home'      ? 'active':'' %>">Home</a></li>
-        <li><a href="/available-puppies"   class="<%= page==='puppies'   ? 'active':'' %>">Available Puppies</a></li>
+        <li class="has-dropdown">
+          <a href="/available-puppies" class="<%= page==='puppies' ? 'active':'' %> nav-dropdown-trigger">
+            Available Puppies
+            <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><polyline points="6 9 12 15 18 9"/></svg>
+          </a>
+          <ul class="nav-dropdown">
+            <li>
+              <a href="/available-puppies" class="nav-dropdown-item">
+                <span class="nav-dropdown-flag">🇺🇸</span>
+                <span>
+                  <strong>American Cocker Spaniel</strong>
+                  <small>AKC Registered · From $1,000</small>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="/available-puppies/english-cocker-spaniel" class="nav-dropdown-item">
+                <span class="nav-dropdown-flag">🇬🇧</span>
+                <span>
+                  <strong>English Cocker Spaniel</strong>
+                  <small>KC Registered · From $1,400</small>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </li>
         <li><a href="/locations"           class="<%= page==='locations' ? 'active':'' %>">Locations</a></li>
         <li><a href="/reviews"             class="<%= page==='reviews'   ? 'active':'' %>">Reviews</a></li>
         <li><a href="/blog"                class="<%= page==='blog'      ? 'active':'' %>">Blog</a></li>
@@ -61,7 +86,11 @@
 
     <nav class="mobile-menu">
       <a href="/"                  class="<%= page==='home'      ? 'active':'' %>">Home</a>
-      <a href="/available-puppies" class="<%= page==='puppies'   ? 'active':'' %>">Available Puppies</a>
+      <div class="mobile-breed-group">
+        <span class="mobile-breed-label">Available Puppies</span>
+        <a href="/available-puppies" class="<%= page==='puppies' ? 'active':'' %> mobile-breed-link">🇺🇸 American Cocker Spaniel</a>
+        <a href="/available-puppies/english-cocker-spaniel" class="<%= page==='puppies' ? 'active':'' %> mobile-breed-link">🇬🇧 English Cocker Spaniel</a>
+      </div>
       <a href="/locations"         class="<%= page==='locations' ? 'active':'' %>">Locations</a>
       <a href="/reviews"           class="<%= page==='reviews'   ? 'active':'' %>">Reviews</a>
       <a href="/blog"              class="<%= page==='blog'      ? 'active':'' %>">Blog</a>

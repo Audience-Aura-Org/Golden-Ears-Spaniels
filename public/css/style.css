@@ -257,6 +257,151 @@ h4 { font-size: clamp(.95rem, 2.2vw, 1.05rem); }
 .nav-links a.active::after { transform: scaleX(1); }
 .nav-cta { margin-left: 8px; }
 
+/* ── Nav Dropdown ──────────────────────────────────────────────────── */
+.nav-links .has-dropdown { position: relative; }
+.nav-dropdown-trigger { display: flex; align-items: center; gap: 4px; }
+.nav-chevron { flex-shrink: 0; transition: transform .2s; }
+.has-dropdown:hover .nav-chevron { transform: rotate(180deg); }
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.09);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.12);
+  min-width: 270px;
+  padding: 8px;
+  list-style: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-6px);
+  transition: opacity .2s, transform .2s;
+  z-index: 500;
+}
+.has-dropdown:hover .nav-dropdown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--text-dark) !important;
+  text-decoration: none;
+  transition: background .15s;
+}
+.nav-dropdown-item:hover { background: var(--cream); }
+.nav-dropdown-item::after { display: none !important; }
+.nav-dropdown-flag { font-size: 1.5rem; flex-shrink: 0; line-height: 1; }
+.nav-dropdown-item strong { display: block; font-size: .85rem; font-weight: 600; color: var(--text-dark); }
+.nav-dropdown-item small  { display: block; font-size: .74rem; color: var(--text-mid); margin-top: 1px; }
+
+/* ── Mobile breed group ────────────────────────────────────────────── */
+.mobile-breed-group { display: flex; flex-direction: column; }
+.mobile-breed-label {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 10px 0 4px;
+}
+.mobile-breed-link {
+  padding: 9px 0 9px 10px;
+  font-size: .95rem;
+  color: var(--text-dark);
+  text-decoration: none;
+  border-left: 2px solid var(--cream-border);
+  margin-bottom: 2px;
+}
+.mobile-breed-link:hover,
+.mobile-breed-link.active { color: var(--brown); border-left-color: var(--gold); }
+
+/* ── Breed switch bar ─────────────────────────────────────────────── */
+.breed-switch-bar {
+  background: var(--brown-dark);
+  padding: 10px 0;
+}
+.breed-switch-bar .container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.breed-switch-label {
+  font-size: .78rem;
+  color: rgba(255,255,255,.5);
+  font-weight: 500;
+  margin-right: 4px;
+}
+.breed-switch-btn {
+  font-size: .82rem;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 20px;
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.15);
+  transition: background .2s, color .2s;
+}
+.breed-switch-btn:hover     { background: rgba(255,255,255,.1); color: #fff; }
+.breed-switch-active        { background: var(--gold); color: #fff !important; border-color: var(--gold); }
+
+/* ── Breed info strip (English page) ──────────────────────────────── */
+.breed-info-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.breed-info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+.breed-info-icon { font-size: 1.6rem; flex-shrink: 0; }
+.breed-info-item strong { display: block; font-size: .85rem; font-weight: 700; color: var(--text-dark); }
+.breed-info-item span   { font-size: .75rem; color: var(--text-mid); }
+
+/* ── Breed badge on hero & card ───────────────────────────────────── */
+.breed-badge-hero { margin-bottom: 8px; }
+.breed-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+.breed-badge-english { background: rgba(0,68,102,.8); color: #fff; }
+.breed-tag-card {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0,68,102,.85);
+  color: #fff;
+  font-size: .68rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .breed-info-strip { grid-template-columns: 1fr 1fr; }
+  .breed-switch-bar .container { justify-content: center; }
+}
+@media (max-width: 480px) {
+  .breed-info-strip { grid-template-columns: 1fr; }
+}
+
 /* Hamburger */
 .nav-toggle {
   display: none;
@@ -1391,7 +1536,7 @@ select.form-control {
   .footer-grid            { grid-template-columns: 1fr 1fr; gap: 20px 24px; }
   .footer-brand           { grid-column: 1 / -1; text-align: center; }
   .footer-logo-wrap       { justify-content: center; }
-  .footer-contact-item    { justify-content: flex-start; }
+  .footer-contact-item    { justify-content: center; }
   .footer-links           { align-items: center; }
   .footer h5              { text-align: center; }
   .footer-bottom          { flex-direction: column; text-align: center; }
@@ -1402,8 +1547,8 @@ select.form-control {
   .hero-stats             { justify-content: center; }
   .why-card               { text-align: center; }
   .why-card-icon          { margin-left: auto; margin-right: auto; }
-  .contact-info-item      { justify-content: center; }
-  .contact-info-text      { text-align: center; }
+  .contact-info-item      { justify-content: flex-start; }
+  .contact-info-text      { text-align: left; }
 
   /* CTA */
   .cta-banner       { padding: 52px 0; }
