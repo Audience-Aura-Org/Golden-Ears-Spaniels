@@ -1297,6 +1297,8 @@ select.form-control {
 .footer-links { display: flex; flex-direction: column; gap: 8px; }
 .footer-links a { font-size: .8rem; color: rgba(255,255,255,.52); transition: color .2s; }
 .footer-links a:hover { color: var(--gold); }
+.footer-links-label { font-size: .65rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--gold); margin-top: 10px; pointer-events: none; }
+.footer-links-label:first-child { margin-top: 0; }
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,.08);
   padding-top: 20px;
