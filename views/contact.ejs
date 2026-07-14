@@ -155,17 +155,29 @@
             </label>
             <select id="puppyOfInterest" name="puppyOfInterest" class="form-control" required>
               <option value="">Select a Puppy</option>
-              <optgroup label="🎀 Female Puppies">
-                <option disabled style="font-size:.8rem; color:var(--text-light);">— Females —</option>
-                <% allPuppies.filter(p => p.gender === 'Female').forEach(p => { %>
+              <optgroup label="🇺🇸 American Cocker — Females">
+                <% allPuppies.filter(p => p.gender === 'Female' && p.breed !== 'English Cocker Spaniel').forEach(p => { %>
                 <option value="<%= p.name.toUpperCase() %>" <%= preSelected === p.name.toUpperCase() ? 'selected' : '' %>>
                   <%= p.name %> — <%= p.color %> ($<%= p.price.toLocaleString() %>)
                 </option>
                 <% }); %>
               </optgroup>
-              <optgroup label="🐾 Male Puppies">
-                <option disabled style="font-size:.8rem; color:var(--text-light);">— Males —</option>
-                <% allPuppies.filter(p => p.gender === 'Male').forEach(p => { %>
+              <optgroup label="🇺🇸 American Cocker — Males">
+                <% allPuppies.filter(p => p.gender === 'Male' && p.breed !== 'English Cocker Spaniel').forEach(p => { %>
+                <option value="<%= p.name.toUpperCase() %>" <%= preSelected === p.name.toUpperCase() ? 'selected' : '' %>>
+                  <%= p.name %> — <%= p.color %> ($<%= p.price.toLocaleString() %>)
+                </option>
+                <% }); %>
+              </optgroup>
+              <optgroup label="🇬🇧 English Cocker — Females">
+                <% allPuppies.filter(p => p.gender === 'Female' && p.breed === 'English Cocker Spaniel').forEach(p => { %>
+                <option value="<%= p.name.toUpperCase() %>" <%= preSelected === p.name.toUpperCase() ? 'selected' : '' %>>
+                  <%= p.name %> — <%= p.color %> ($<%= p.price.toLocaleString() %>)
+                </option>
+                <% }); %>
+              </optgroup>
+              <optgroup label="🇬🇧 English Cocker — Males">
+                <% allPuppies.filter(p => p.gender === 'Male' && p.breed === 'English Cocker Spaniel').forEach(p => { %>
                 <option value="<%= p.name.toUpperCase() %>" <%= preSelected === p.name.toUpperCase() ? 'selected' : '' %>>
                   <%= p.name %> — <%= p.color %> ($<%= p.price.toLocaleString() %>)
                 </option>

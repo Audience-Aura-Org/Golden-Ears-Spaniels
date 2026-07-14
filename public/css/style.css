@@ -402,6 +402,72 @@ h4 { font-size: clamp(.95rem, 2.2vw, 1.05rem); }
   .breed-info-strip { grid-template-columns: 1fr; }
 }
 
+/* ── Home breed tabs ──────────────────────────────────────────────── */
+.home-breed-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.home-breed-tab {
+  background: none;
+  border: 2px solid var(--cream-border);
+  border-radius: 24px;
+  padding: 9px 22px;
+  font-family: inherit;
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: border-color .2s, color .2s, background .2s;
+}
+.home-breed-tab:hover { border-color: var(--gold); color: var(--brown); }
+.home-breed-tab.active { background: var(--brown); border-color: var(--brown); color: #fff; }
+.home-breed-panel { }
+.home-breed-panel.hidden { display: none; }
+
+/* ── Breed compare grid ───────────────────────────────────────────── */
+.breeds-compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.breed-compare-card {
+  background: var(--cream);
+  border: 2px solid var(--cream-border);
+  border-radius: var(--radius-xl);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+}
+.breed-compare-card-english {
+  background: #eef4f8;
+  border-color: #c5dce8;
+}
+.breed-compare-flag { font-size: 2.2rem; margin-bottom: 14px; }
+.breed-compare-card h3 { font-size: 1.35rem; margin-bottom: 0; color: var(--text-dark); }
+.breed-trait-list { list-style: none; display: flex; flex-direction: column; gap: 9px; margin: 0; padding: 0; }
+.breed-trait-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .88rem;
+  color: var(--text-mid);
+}
+.breed-trait-list li span { color: var(--gold); font-size: .9rem; flex-shrink: 0; }
+
+/* ── American breed tag on cards ─────────────────────────────────── */
+.breed-tag-card[style*="American"],
+.breed-tag-card:not([style*="102"]) {
+  background: rgba(139,90,43,.82);
+}
+
+@media (max-width: 768px) {
+  .breeds-compare-grid { grid-template-columns: 1fr; gap: 18px; }
+  .breed-compare-card  { padding: 22px 18px; }
+}
+
 /* Hamburger */
 .nav-toggle {
   display: none;

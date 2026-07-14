@@ -681,12 +681,14 @@ const contactLimiter = rateLimit({
 // ─── Routes ────────────────────────────────────────────────────────────────────
 app.get('/', (req, res) => {
   const featuredFemales = puppies.females.slice(0, 2);
-  const featuredMales = puppies.males.slice(0, 2);
+  const featuredMales   = puppies.males.slice(0, 2);
+  const featuredEnglish = [...englishPuppies.females.slice(0, 1), ...englishPuppies.males.slice(0, 1)];
   res.render('index', {
     page: 'home',
-    title: 'Golden Ears Spaniels | AKC Cocker Spaniel Puppies for Sale',
-    description: 'Premier AKC Cocker Spaniel breeder since 2019. Home-raised, health-tested puppies available across the USA, Canada & UK. 2-year health guarantee.',
+    title: 'Golden Ears Spaniels | American & English Cocker Spaniel Puppies',
+    description: 'Premier breeder of American & English Cocker Spaniel puppies since 2019. AKC & KC registered, home-raised, health-tested. Delivered across the USA, Canada & UK.',
     featuredFemales,
+    featuredEnglish,
     featuredMales,
     deliveryOptions,
     testimonials,
@@ -742,7 +744,7 @@ app.get('/about', (req, res) => {
 });
 
 app.get('/contact', (req, res) => {
-  const allPuppies = [...puppies.females, ...puppies.males];
+  const allPuppies = [...puppies.females, ...puppies.males, ...englishPuppies.females, ...englishPuppies.males];
   res.render('contact', {
     page: 'contact',
     title: 'Contact Us | Golden Ears Spaniels',
@@ -756,7 +758,7 @@ app.get('/contact', (req, res) => {
 });
 
 app.post('/contact', contactLimiter, async (req, res) => {
-  const allPuppies = [...puppies.females, ...puppies.males];
+  const allPuppies = [...puppies.females, ...puppies.males, ...englishPuppies.females, ...englishPuppies.males];
   const { firstName, lastName, email, phone, city, state, puppyOfInterest, message, howHeard } = req.body;
 
   // Basic validation
@@ -919,7 +921,7 @@ app.get('/locations/:slug', (req, res) => {
   const loc = locations.find(l => l.slug === req.params.slug);
   if (!loc) return res.redirect('/locations');
   const others = locations.filter(l => l.slug !== loc.slug);
-  const allPuppies = [...puppies.females, ...puppies.males];
+  const allPuppies = [...puppies.females, ...puppies.males, ...englishPuppies.females, ...englishPuppies.males];
   res.render('location', {
     page: 'locations',
     title: `Cocker Spaniel Puppies in ${loc.city}, ${loc.state} | Golden Ears Spaniels`,
