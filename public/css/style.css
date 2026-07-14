@@ -1385,9 +1385,23 @@ select.form-control {
   .form-card { padding: 24px 18px; }
   .form-row  { grid-template-columns: 1fr; gap: 0; }
 
-  /* Footer */
-  .footer-grid   { grid-template-columns: 1fr; gap: 22px; }
-  .footer-bottom { flex-direction: column; text-align: center; }
+  /* Footer — 2×2 grid on mobile */
+  .footer-grid            { grid-template-columns: 1fr 1fr; gap: 20px 24px; }
+  .footer-brand           { grid-column: 1 / -1; text-align: center; }
+  .footer-logo-wrap       { justify-content: center; }
+  .footer-contact-item    { justify-content: center; }
+  .footer-links           { align-items: center; }
+  .footer h5              { text-align: center; }
+  .footer-bottom          { flex-direction: column; text-align: center; }
+
+  /* Mobile content centering */
+  .hero-content           { text-align: center; }
+  .hero-eyebrow           { justify-content: center; }
+  .hero-stats             { justify-content: center; }
+  .why-card               { text-align: center; }
+  .why-card-icon          { margin-left: auto; margin-right: auto; }
+  .contact-info-item      { justify-content: center; }
+  .contact-info-text      { text-align: center; }
 
   /* CTA */
   .cta-banner       { padding: 52px 0; }
