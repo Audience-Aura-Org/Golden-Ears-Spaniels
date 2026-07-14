@@ -1391,7 +1391,7 @@ select.form-control {
   .footer-grid            { grid-template-columns: 1fr 1fr; gap: 20px 24px; }
   .footer-brand           { grid-column: 1 / -1; text-align: center; }
   .footer-logo-wrap       { justify-content: center; }
-  .footer-contact-item    { justify-content: center; }
+  .footer-contact-item    { justify-content: flex-start; }
   .footer-links           { align-items: center; }
   .footer h5              { text-align: center; }
   .footer-bottom          { flex-direction: column; text-align: center; }
