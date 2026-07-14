@@ -180,6 +180,23 @@
   </div>
 </section>
 
+<!-- ─── Payment Methods ──────────────────────────────────────────── -->
+<section class="section" style="background:var(--cream); padding:36px 0;">
+  <div class="container">
+    <div class="payment-strip">
+      <span class="payment-strip-label">Secure Payment Methods:</span>
+      <div class="payment-strip-badges">
+        <% paymentMethods.forEach(pm => { %>
+        <div class="payment-pill">
+          <span class="payment-pill-icon" style="color:<%= pm.color %>;"><%- pm.icon %></span>
+          <span class="payment-pill-name"><%= pm.name %></span>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── Delivery Options ──────────────────────────────────────────── -->
 <section class="section delivery-section">
   <div class="container">
@@ -262,6 +279,9 @@
         </div>
       </div>
       <% }); %>
+    </div>
+    <div class="text-center" style="margin-top:36px;">
+      <a href="/reviews" class="btn btn-secondary btn-lg">Read All <%= testimonials.length %>+ Reviews →</a>
     </div>
   </div>
 </section>

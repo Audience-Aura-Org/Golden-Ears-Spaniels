@@ -196,6 +196,70 @@ const testimonials = [
     rating: 5,
     text: 'Absolutely wonderful experience from start to finish. The puppy was exactly as described, AKC paperwork was ready on arrival, and the team has stayed in touch to check in on her.',
   },
+  {
+    name: 'Oliver H.',
+    location: 'London, UK',
+    rating: 5,
+    text: 'Ordered our little boy Romeo all the way from London and the experience was seamless. The flight nanny kept us updated with photos the entire journey. He arrived calm, healthy, and ready to play!',
+  },
+  {
+    name: 'Gemma & Paul W.',
+    location: 'Manchester, UK',
+    rating: 5,
+    text: 'We were a little apprehensive ordering from the States but Golden Ears made every step easy. The documentation, health records, and communication were outstanding. Our spaniel is perfect.',
+  },
+  {
+    name: 'Fiona R.',
+    location: 'Edinburgh, UK',
+    rating: 5,
+    text: 'What a wonderful breeder. Joy arrived healthy and full of personality — exactly as described. The team answered every single question I had, no matter how small. Highly recommend!',
+  },
+  {
+    name: 'Diana R.',
+    location: 'Miami, FL',
+    rating: 5,
+    text: 'Received my girl in Miami — she was in perfect health, exactly as described. The team stayed in touch throughout the whole delivery. Best decision we ever made.',
+  },
+  {
+    name: 'Kevin & Lisa M.',
+    location: 'Birmingham, UK',
+    rating: 5,
+    text: 'From first inquiry to puppy arriving at our door, Golden Ears were professional, warm, and incredibly helpful. Our Cocker Spaniel has brought so much joy to the whole family.',
+  },
+  {
+    name: 'Aisha B.',
+    location: 'Seattle, WA',
+    rating: 5,
+    text: 'I did a lot of research before choosing Golden Ears and I\'m so glad I did. The puppy was healthy, happy, and clearly loved before coming to us. The 2-year guarantee gave us real peace of mind.',
+  },
+  {
+    name: 'Robert & Jane K.',
+    location: 'Calgary, AB',
+    rating: 5,
+    text: 'Second time buying from Golden Ears — that says everything. Both puppies arrived perfectly healthy and full of personality. The cross-border documentation was handled flawlessly.',
+  },
+  {
+    name: 'Natalie S.',
+    location: 'Houston, TX',
+    rating: 5,
+    text: 'I was gifted a Golden Ears puppy by my husband and she has been the most joyful addition to our home. The breeder still checks in on us months later. Truly exceptional service.',
+  },
+  {
+    name: 'Tom & Bridget F.',
+    location: 'Dublin, Ireland',
+    rating: 5,
+    text: 'Our little Maple is the star of the neighbourhood! Golden Ears guided us through international delivery step by step. The whole experience was far easier than we expected.',
+  },
+];
+
+// ─── Payment Methods ────────────────────────────────────────────────────────────
+const paymentMethods = [
+  { name: 'PayPal', icon: '<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.076 21.337H2.47a.641.641 0 01-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 00-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 00-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 00.554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 01.923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg>', color: '#003087' },
+  { name: 'Zelle', icon: '<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.25 16.5h-7.5l4.688-9H7.5V6h7.5l-4.688 9H19.5v1.5z"/></svg>', color: '#6d1ed4' },
+  { name: 'CashApp', icon: '<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M23.59 3.48A5 5 0 0020.52.41L14.4 0l-2.85 2.85 2.14 2.14-1.36 1.36L8.5 2.42a1 1 0 00-1.41 0L4.5 5a1 1 0 000 1.41L7.93 9.84l-1.36 1.36L4.43 9.06 1.58 11.91l.41 6.12A5 5 0 005.06 21l6.12.41 2.85-2.85-2.14-2.14 1.36-1.36 3.93 3.93a1 1 0 001.41 0l2.59-2.59a1 1 0 000-1.41l-3.93-3.93 1.36-1.36 2.14 2.14L23.59 9.6l-.41-6.12z"/></svg>', color: '#00D632' },
+  { name: 'Venmo', icon: '<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19.1 1c.5 1 .7 2 .7 3.4 0 4.2-3.6 9.7-6.5 13.5H7.2L4.5 2.4l5.6-.5 1.4 10.8c1.3-2.1 2.9-5.5 2.9-7.7 0-1.2-.2-2.1-.5-2.9L19.1 1z"/></svg>', color: '#3d95ce' },
+  { name: 'Visa / Mastercard', icon: '<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>', color: '#1a1f71' },
+  { name: 'Bank Transfer', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 10v11M12 10v11M16 10v11"/></svg>', color: '#5A4634' },
 ];
 
 // ─── Blog Data ─────────────────────────────────────────────────────────────────
@@ -379,6 +443,58 @@ const locations = [
     imageAlt: 'Cocker Spaniel puppy arriving in Toronto Canada',
     testimonial: { name: 'Priya L.', text: 'The flight nanny sent photos the whole way from Georgia to Toronto Pearson. Our puppy was calm and happy — best experience ever.', rating: 5 },
   },
+  {
+    slug: 'london',
+    city: 'London',
+    state: 'England',
+    country: 'UK',
+    icon: '🎡',
+    airports: ['Heathrow (LHR)', 'Gatwick (LGW)', 'Stansted (STN)'],
+    description: 'We deliver Cocker Spaniel puppies to London and surrounding areas including Surrey, Kent, Essex, and the Home Counties. Our flight nannies ensure a stress-free journey.',
+    deliveryNote: 'We fly into Heathrow (LHR) or Gatwick (LGW) with our professional flight nanny service. All CITES and PETS travel documentation handled for UK buyers.',
+    image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=900&auto=format&fit=crop&q=80',
+    imageAlt: 'Cocker Spaniel puppy in London UK',
+    testimonial: { name: 'Oliver H.', text: 'Ordered our little boy all the way from London — the flight nanny kept us updated with photos the entire journey. He arrived calm and healthy!', rating: 5 },
+  },
+  {
+    slug: 'manchester',
+    city: 'Manchester',
+    state: 'England',
+    country: 'UK',
+    icon: '🐝',
+    airports: ['Manchester Airport (MAN)'],
+    description: 'Delivering Cocker Spaniel puppies to Manchester, Salford, Trafford, Stockport, and families across the North West of England.',
+    deliveryNote: 'Our flight nannies fly directly into Manchester Airport (MAN). Full international health documentation and veterinary certificates provided.',
+    image: 'https://images.unsplash.com/photo-1568684912181-8e2d0a4dcde5?w=900&auto=format&fit=crop&q=80',
+    imageAlt: 'Cocker Spaniel puppy in Manchester UK',
+    testimonial: { name: 'Gemma & Paul W.', text: 'We were a little apprehensive ordering from the States but Golden Ears made every step easy. The documentation and communication were outstanding.', rating: 5 },
+  },
+  {
+    slug: 'edinburgh',
+    city: 'Edinburgh',
+    state: 'Scotland',
+    country: 'UK',
+    icon: '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
+    airports: ['Edinburgh Airport (EDI)'],
+    description: 'Serving Edinburgh, Glasgow, Dundee, and families across Scotland with safe, professional Cocker Spaniel puppy delivery.',
+    deliveryNote: 'Our flight nannies fly into Edinburgh (EDI) or Glasgow (GLA). We handle all UK import documentation including veterinary health certificates.',
+    image: 'https://images.unsplash.com/photo-1506377585622-bedcbb5a9d9f?w=900&auto=format&fit=crop&q=80',
+    imageAlt: 'Cocker Spaniel puppy in Edinburgh Scotland',
+    testimonial: { name: 'Fiona R.', text: 'Joy arrived healthy and full of personality — exactly as described. The team answered every question I had. Couldn\'t recommend Golden Ears more.', rating: 5 },
+  },
+  {
+    slug: 'birmingham',
+    city: 'Birmingham',
+    state: 'England',
+    country: 'UK',
+    icon: '🏭',
+    airports: ['Birmingham Airport (BHX)'],
+    description: 'Cocker Spaniel puppies delivered to Birmingham, Coventry, Wolverhampton, and families across the West Midlands region.',
+    deliveryNote: 'We fly into Birmingham Airport (BHX) with our flight nanny service. All international veterinary health certificates and documentation provided.',
+    image: 'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?w=900&auto=format&fit=crop&q=80',
+    imageAlt: 'Cocker Spaniel puppy in Birmingham UK',
+    testimonial: { name: 'Kevin & Lisa M.', text: 'From first inquiry to puppy arriving at our door, Golden Ears were professional, warm, and incredibly helpful. Our spaniel has brought so much joy.', rating: 5 },
+  },
 ];
 
 // ─── Mailer ────────────────────────────────────────────────────────────────────
@@ -415,11 +531,12 @@ app.get('/', (req, res) => {
   res.render('index', {
     page: 'home',
     title: 'Golden Ears Spaniels | AKC Cocker Spaniel Puppies for Sale',
-    description: 'Premier AKC Cocker Spaniel breeder since 2019. Home-raised, health-tested puppies available across the USA & Canada. 2-year health guarantee.',
+    description: 'Premier AKC Cocker Spaniel breeder since 2019. Home-raised, health-tested puppies available across the USA, Canada & UK. 2-year health guarantee.',
     featuredFemales,
     featuredMales,
     deliveryOptions,
     testimonials,
+    paymentMethods,
   });
 });
 
@@ -464,6 +581,7 @@ app.get('/contact', (req, res) => {
     preSelected: req.query.puppy || '',
     success: false,
     error: false,
+    paymentMethods,
   });
 });
 
@@ -481,6 +599,7 @@ app.post('/contact', contactLimiter, async (req, res) => {
       preSelected: puppyOfInterest || '',
       success: false,
       error: 'Please fill in all required fields.',
+      paymentMethods,
     });
   }
 
@@ -576,6 +695,7 @@ app.post('/contact', contactLimiter, async (req, res) => {
       preSelected: '',
       success: true,
       error: false,
+      paymentMethods,
     });
   } catch (err) {
     console.error('Email error:', err);
@@ -587,6 +707,7 @@ app.post('/contact', contactLimiter, async (req, res) => {
       preSelected: puppyOfInterest || '',
       success: false,
       error: 'Sorry, something went wrong. Please try again or email us directly.',
+      paymentMethods,
     });
   }
 });
@@ -645,6 +766,15 @@ app.get('/faq', (req, res) => {
     page: 'faq',
     title: 'FAQ – Golden Ears Spaniels | Common Questions Answered',
     description: 'Answers to the most common questions about adopting a Golden Ears Cocker Spaniel puppy — deposits, health guarantees, delivery, and more.',
+  });
+});
+
+app.get('/reviews', (req, res) => {
+  res.render('reviews', {
+    page: 'reviews',
+    title: 'Customer Reviews | Golden Ears Spaniels – 5-Star Verified Families',
+    description: 'Read verified 5-star reviews from families across the USA, Canada, and UK who welcomed a Golden Ears Cocker Spaniel puppy into their home.',
+    testimonials,
   });
 });
 

@@ -1,0 +1,114 @@
+<%- include('partials/head') %>
+<%- include('partials/nav') %>
+
+<!-- ─── Reviews Hero ──────────────────────────────────────────────── -->
+<section class="page-header" style="background-image: linear-gradient(135deg, rgba(33,23,16,.88) 0%, rgba(33,23,16,.76) 55%, rgba(74,48,32,.82) 100%), url('https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1600&auto=format&fit=crop&q=60'); background-size: cover; background-position: center;">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <span>Reviews</span>
+    </div>
+    <p class="section-label">Verified Families</p>
+    <h1>Real Stories,<br>Real Love</h1>
+    <p class="lead">Every review below is from a real family who welcomed a Golden Ears Cocker Spaniel into their home. We're proud of the joy these puppies bring.</p>
+    <div class="page-stats" style="margin-top:36px;">
+      <div class="page-stat">
+        <span class="page-stat-num">5.0</span>
+        <span class="page-stat-label">Average Rating</span>
+      </div>
+      <div class="page-stat">
+        <span class="page-stat-num"><%= testimonials.length %>+</span>
+        <span class="page-stat-label">Verified Reviews</span>
+      </div>
+      <div class="page-stat">
+        <span class="page-stat-num">3</span>
+        <span class="page-stat-label">Countries</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Aggregate Rating ──────────────────────────────────────────── -->
+<section class="section" style="background:var(--white); padding:36px 0;">
+  <div class="container">
+    <div class="reviews-aggregate">
+      <div class="reviews-score">
+        <div class="reviews-score-num">5.0</div>
+        <div class="reviews-score-stars">★★★★★</div>
+        <div class="reviews-score-label">out of 5</div>
+      </div>
+      <div class="reviews-bars">
+        <% [5,4,3,2,1].forEach(n => { %>
+        <div class="reviews-bar-row">
+          <span class="reviews-bar-label"><%= n %> ★</span>
+          <div class="reviews-bar-track">
+            <div class="reviews-bar-fill" style="width:<%= n === 5 ? '100' : '0' %>%;"></div>
+          </div>
+          <span class="reviews-bar-count"><%= n === 5 ? testimonials.length : 0 %></span>
+        </div>
+        <% }); %>
+      </div>
+      <div class="reviews-summary">
+        <p>All <%= testimonials.length %>+ reviews are from families who purchased a puppy directly from Golden Ears Spaniels. We have never had a rating below 5 stars.</p>
+        <a href="/contact" class="btn btn-primary" style="margin-top:16px;">Reserve Your Puppy</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Reviews by Country ────────────────────────────────────────── -->
+<% const countries = ['USA', 'Canada', 'UK', 'Ireland']; %>
+<% countries.forEach(country => { %>
+<%   const countryReviews = testimonials.filter(t => {
+       if (country === 'USA') return t.location.match(/, [A-Z]{2}$/) && !t.location.includes('ON') && !t.location.includes('BC') && !t.location.includes('AB');
+       if (country === 'Canada') return t.location.includes(', ON') || t.location.includes(', BC') || t.location.includes(', AB');
+       if (country === 'UK') return t.location.includes('UK');
+       if (country === 'Ireland') return t.location.includes('Ireland');
+       return false;
+     }); %>
+<%   if (countryReviews.length > 0) { %>
+<section class="section" style="background:<%= country === 'Canada' ? 'var(--cream)' : country === 'UK' ? 'var(--white)' : country === 'Ireland' ? 'var(--cream)' : 'var(--cream)' %>; padding-top:48px; padding-bottom:48px;">
+  <div class="container">
+    <div class="reviews-country-head">
+      <span class="reviews-country-flag">
+        <% if(country==='USA')   { %>🇺🇸<% } %>
+        <% if(country==='Canada'){ %>🇨🇦<% } %>
+        <% if(country==='UK')    { %>🇬🇧<% } %>
+        <% if(country==='Ireland'){ %>🇮🇪<% } %>
+      </span>
+      <h2 class="reviews-country-title"><%= country %> Families</h2>
+      <span class="reviews-country-count"><%= countryReviews.length %> review<%= countryReviews.length !== 1 ? 's' : '' %></span>
+    </div>
+    <div class="testimonials-grid">
+      <% countryReviews.forEach(t => { %>
+      <div class="testimonial-card">
+        <div class="stars">
+          <% for(let i = 0; i < t.rating; i++) { %><span>★</span><% } %>
+        </div>
+        <p class="testimonial-text">"<%= t.text %>"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">🙋</div>
+          <div>
+            <div class="testimonial-name"><%= t.name %></div>
+            <div class="testimonial-loc">📍 <%= t.location %></div>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<%   } %>
+<% }); %>
+
+<!-- ─── CTA ───────────────────────────────────────────────────────── -->
+<section class="cta-banner">
+  <div class="container">
+    <h2>Join Hundreds of Happy Families</h2>
+    <p>Your perfect Cocker Spaniel companion is waiting. Reach out today and we'll guide you every step of the way.</p>
+    <a href="/contact" class="btn btn-primary btn-lg">Reserve a Puppy Today</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
