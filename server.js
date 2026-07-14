@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 3000;
 // ─── Settings Helpers ────────────────────────────────────────────────────────
 const SETTINGS_PATH = path.join(__dirname, 'data', 'settings.json');
 const ADMIN_PATH    = path.join(__dirname, 'data', 'admin.json');
+const PUPPIES_PATH  = path.join(__dirname, 'data', 'puppies.json');
 
 function loadSettings() {
   return JSON.parse(fs.readFileSync(SETTINGS_PATH, 'utf8'));
@@ -20,251 +21,15 @@ function loadSettings() {
 function saveSettings(s) {
   fs.writeFileSync(SETTINGS_PATH, JSON.stringify(s, null, 2));
 }
+function loadPuppies() {
+  return JSON.parse(fs.readFileSync(PUPPIES_PATH, 'utf8'));
+}
+function savePuppies(p) {
+  fs.writeFileSync(PUPPIES_PATH, JSON.stringify(p, null, 2));
+}
 
-// ─── Puppy Data ────────────────────────────────────────────────────────────────
-const puppies = {
-  females: [
-    {
-      name: 'Joy',
-      slug: 'joy',
-      gender: 'Female',
-      age: '11 weeks',
-      price: 1100,
-      color: 'Golden / Apricot',
-      markings: 'Beautiful golden-apricot coat with silky ears',
-      status: 'Available',
-      description: 'Sweet, gentle, and deeply affectionate. Joy lives up to her name — she lights up every room and is perfect for families with children. She loves cuddles and has been raised with early socialization.',
-      image: '/image/females%20(1).jpg',
-      healthGuarantees: ['2-year health guarantee', 'Genetic health screening', 'Eye clearances', 'AKC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-    {
-      name: 'Chica',
-      slug: 'chica',
-      gender: 'Female',
-      age: '11 weeks',
-      price: 1100,
-      color: 'Black & White Parti',
-      markings: 'Classic black and white parti-color pattern',
-      status: 'Available',
-      description: 'Playful, curious, and people-oriented. Chica thrives on attention and bonding. She follows you everywhere and has an endearing personality that makes her impossible to resist.',
-      image: '/image/females%20(2).jpg',
-      healthGuarantees: ['2-year health guarantee', 'Genetic health screening', 'Eye clearances', 'AKC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-    {
-      name: 'Maple',
-      slug: 'maple',
-      gender: 'Female',
-      age: '11 weeks',
-      price: 1200,
-      color: 'Light Apricot / Cream',
-      markings: 'Stunning light apricot and soft cream coloring',
-      status: 'Available',
-      description: 'Maple is the calm, wise one of the litter. Intelligent and quick to learn, she is ideal for families who want an easy-going companion who adapts beautifully to any home environment.',
-      image: '/image/females%20(3).jpg',
-      healthGuarantees: ['2-year health guarantee', 'Genetic health screening', 'Eye & hip clearances', 'AKC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-  ],
-  males: [
-    {
-      name: 'Dino',
-      slug: 'dino',
-      gender: 'Male',
-      age: '11 weeks',
-      price: 1000,
-      color: 'Dark Brown / Chocolate',
-      markings: 'Rich dark chocolate brown coat',
-      status: 'Available',
-      description: 'Confident, friendly, and outgoing. Dino is the adventurer of the group — great for active families who enjoy walks, hikes, and outdoor adventures. Full of energy and heart.',
-      image: '/image/male%20(1).jpg',
-      healthGuarantees: ['2-year health guarantee', 'Genetic health screening', 'Eye & hip clearances', 'AKC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-    {
-      name: 'Romeo',
-      slug: 'romeo',
-      gender: 'Male',
-      age: '11 weeks',
-      price: 1000,
-      color: 'Golden / Cream',
-      markings: 'Stunning golden and cream coat',
-      status: 'Available',
-      description: 'Loving, playful, and people-focused. Romeo is very affectionate and social — he adores being held and will melt your heart from day one. A true companion dog through and through.',
-      image: '/image/male%20(2).jpg',
-      healthGuarantees: ['2-year health guarantee', 'Genetic health screening', 'Eye & hip clearances', 'AKC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-    {
-      name: 'Rio',
-      slug: 'rio',
-      gender: 'Male',
-      age: '11 weeks',
-      price: 1000,
-      color: 'Buff / Golden',
-      markings: 'Warm buff and golden tones',
-      status: 'Available',
-      description: 'Energetic, fun, and great with kids. Rio is the playful spirit — always ready for a game of fetch or a romp in the yard. He is perfect for families who enjoy an active, cheerful dog.',
-      image: '/image/male%20(3).jpg',
-      healthGuarantees: ['2-year health guarantee', 'Genetic health screening', 'Eye & hip clearances', 'AKC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-    {
-      name: 'Cooper',
-      slug: 'cooper',
-      gender: 'Male',
-      age: '11 weeks',
-      price: 1000,
-      color: 'Black & White Parti',
-      markings: 'Beautiful black and white parti-color pattern',
-      status: 'Available',
-      description: 'Smart, eager to please, and wonderfully gentle. Cooper is incredibly trainable and loves learning new tricks. He will grow into a well-mannered, loyal companion that the whole family will adore.',
-      image: '/image/male%20(4).jpg',
-      healthGuarantees: ['2-year health guarantee', 'Genetic health screening', 'Eye & hip clearances', 'AKC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-    {
-      name: 'Duncan',
-      slug: 'duncan',
-      gender: 'Male',
-      age: '11 weeks',
-      price: 1000,
-      color: 'Dark Brown',
-      markings: 'Beautiful dark brown coat',
-      status: 'Available',
-      description: 'Calm, sweet, and deeply loyal. Duncan bonds quickly and loves nothing more than curling up beside you after an adventure. He has the classic Cocker Spaniel temperament — gentle yet spirited.',
-      image: '/image/male%20(5).jpg',
-      healthGuarantees: ['2-year health guarantee', 'Genetic health screening', 'Eye & hip clearances', 'AKC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-    {
-      name: 'Moritz',
-      slug: 'moritz',
-      gender: 'Male',
-      age: '11 weeks',
-      price: 1000,
-      color: 'Chocolate / Ruby',
-      markings: 'Rich chocolate with ruby-toned highlights',
-      status: 'Available',
-      description: 'Distinguished, affectionate, and wonderfully expressive. Moritz has that undeniable spaniel charm — big soulful eyes, silky ears, and a personality that wins everyone over instantly.',
-      image: '/image/male%20(6).jpg',
-      healthGuarantees: ['2-year health guarantee', 'Genetic health screening', 'Eye & hip clearances', 'AKC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-  ],
-};
-
-// ─── English Cocker Spaniel Data ───────────────────────────────────────────────
-const englishPuppies = {
-  females: [
-    {
-      name: 'Rosie',
-      slug: 'eng-rosie',
-      breed: 'English Cocker Spaniel',
-      gender: 'Female',
-      age: '10 weeks',
-      price: 1500,
-      color: 'Golden Roan',
-      markings: 'Warm golden-roan coat with silky feathering',
-      status: 'Available',
-      description: 'Rosie is a gorgeous golden roan English Cocker Spaniel with a gentle, playful temperament. She is wonderfully people-oriented and has been raised around children and other dogs from birth.',
-      image: '/image/english/128638598_172383021247126_6434154303201331941_n.jpg',
-      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-    {
-      name: 'Belle',
-      slug: 'eng-belle',
-      breed: 'English Cocker Spaniel',
-      gender: 'Female',
-      age: '10 weeks',
-      price: 1500,
-      color: 'Liver Roan',
-      markings: 'Rich liver-roan coat with classic ticking',
-      status: 'Available',
-      description: 'Belle is a beautiful liver roan with an affectionate, sweet-natured personality. Curious and bright, she adapts well to both active and relaxed family environments.',
-      image: '/image/english/128661822_172386964580065_4439681651288156166_n.jpg',
-      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-    {
-      name: 'Hazel',
-      slug: 'eng-hazel',
-      breed: 'English Cocker Spaniel',
-      gender: 'Female',
-      age: '10 weeks',
-      price: 1600,
-      color: 'Blue Roan',
-      markings: 'Stunning blue-roan pattern with white highlights',
-      status: 'Available',
-      description: 'Hazel is an elegant blue roan English Cocker with a lively, intelligent character. She loves to play and explore, and her bright eyes and expressive ears make her irresistible.',
-      image: '/image/english/468450603_543059511839019_457076069822272934_n.jpg',
-      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-    {
-      name: 'Ivy',
-      slug: 'eng-ivy',
-      breed: 'English Cocker Spaniel',
-      gender: 'Female',
-      age: '10 weeks',
-      price: 1500,
-      color: 'Orange & White Parti',
-      markings: 'Vivid orange-and-white parti-color with rich feathering',
-      status: 'Available',
-      description: 'Ivy is a vibrant, confident English Cocker Spaniel who loves attention. Her bold orange and white coloring is matched by her bold, outgoing personality — perfect for active families.',
-      image: '/image/english/468562312_543059475172356_8228847003937871735_n.jpg',
-      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-  ],
-  males: [
-    {
-      name: 'Archer',
-      slug: 'eng-archer',
-      breed: 'English Cocker Spaniel',
-      gender: 'Male',
-      age: '10 weeks',
-      price: 1400,
-      color: 'Chocolate Roan',
-      markings: 'Deep chocolate roan with a velvety finish',
-      status: 'Available',
-      description: 'Archer is a handsome chocolate roan English Cocker with a loyal, energetic nature. He is smart, easy to train, and thrives on human companionship — a true working-dog heart in a family dog\'s body.',
-      image: '/image/english/468622908_543059735172330_6867141641617910209_n.jpg',
-      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-    {
-      name: 'Chester',
-      slug: 'eng-chester',
-      breed: 'English Cocker Spaniel',
-      gender: 'Male',
-      age: '10 weeks',
-      price: 1400,
-      color: 'Black & White Parti',
-      markings: 'Classic black and white with ticked markings',
-      status: 'Available',
-      description: 'Chester is a striking black and white English Cocker full of character. Playful, gentle, and endlessly curious, he settles quickly into family life and loves being part of every activity.',
-      image: '/image/english/738217241_122101509291383762_818339417093454236_n.jpg',
-      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-    {
-      name: 'Jasper',
-      slug: 'eng-jasper',
-      breed: 'English Cocker Spaniel',
-      gender: 'Male',
-      age: '10 weeks',
-      price: 1450,
-      color: 'Lemon Roan',
-      markings: 'Pale lemon roan with delicate ticking',
-      status: 'Available',
-      description: 'Jasper is a rare and beautiful lemon roan English Cocker with a calm, steady temperament. Loving and obedient, he is ideal for first-time spaniel owners wanting a devoted companion.',
-      image: '/image/english/738616351_122101561263383762_5078710868062250840_n.jpg',
-      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-    {
-      name: 'Rufus',
-      slug: 'eng-rufus',
-      breed: 'English Cocker Spaniel',
-      gender: 'Male',
-      age: '10 weeks',
-      price: 1400,
-      color: 'Red / Golden Solid',
-      markings: 'Rich solid red-golden coat with cream undertones',
-      status: 'Available',
-      description: 'Rufus is a solid golden-red English Cocker with a warm, affectionate soul. He is enthusiastic, tail-wagging happy, and bonds quickly — the kind of dog that becomes the heart of the home.',
-      image: '/image/english/739470717_122108294793322919_6556678765807789416_n.jpg',
-      healthGuarantees: ['2-year health guarantee', 'DNA health tested', 'Eye & hip clearances', 'KC Registration provided', 'Vaccinations & deworming up to date'],
-    },
-  ],
-};
+// ─── Puppy Data (loaded from data/puppies.json) ────────────────────────────────
+// Use loadPuppies() in each route to always get the latest data.
 
 const deliveryOptions = [
   {
@@ -680,9 +445,10 @@ const contactLimiter = rateLimit({
 
 // ─── Routes ────────────────────────────────────────────────────────────────────
 app.get('/', (req, res) => {
-  const featuredFemales = puppies.females.slice(0, 2);
-  const featuredMales   = puppies.males.slice(0, 2);
-  const featuredEnglish = [...englishPuppies.females.slice(0, 1), ...englishPuppies.males.slice(0, 1)];
+  const p = loadPuppies();
+  const featuredFemales = p.american.females.slice(0, 2);
+  const featuredMales   = p.american.males.slice(0, 2);
+  const featuredEnglish = [...p.english.females.slice(0, 1), ...p.english.males.slice(0, 1)];
   res.render('index', {
     page: 'home',
     title: 'Golden Ears Spaniels | American & English Cocker Spaniel Puppies',
@@ -697,28 +463,31 @@ app.get('/', (req, res) => {
 });
 
 app.get('/available-puppies', (req, res) => {
+  const p = loadPuppies();
   res.render('puppies', {
     page: 'puppies',
     title: 'Available American Cocker Spaniel Puppies | Golden Ears Spaniels',
     description: 'Browse our available AKC American Cocker Spaniel puppies. Males and females, multiple colors, all health-tested with a 2-year guarantee.',
-    females: puppies.females,
-    males: puppies.males,
+    females: p.american.females,
+    males: p.american.males,
   });
 });
 
 app.get('/available-puppies/english-cocker-spaniel', (req, res) => {
+  const p = loadPuppies();
   res.render('english-puppies', {
     page: 'puppies',
     title: 'Available English Cocker Spaniel Puppies | Golden Ears Spaniels',
     description: 'Browse our available English Cocker Spaniel puppies. Stunning roan and parti-color coats, health-tested and KC registered, delivered across the USA, Canada & UK.',
-    females: englishPuppies.females,
-    males: englishPuppies.males,
+    females: p.english.females,
+    males: p.english.males,
   });
 });
 
 app.get('/puppies/:slug', (req, res) => {
-  const allAmerican = [...puppies.females, ...puppies.males];
-  const allEnglish  = [...englishPuppies.females, ...englishPuppies.males];
+  const p = loadPuppies();
+  const allAmerican = [...p.american.females, ...p.american.males];
+  const allEnglish  = [...p.english.females, ...p.english.males];
   const puppy = allAmerican.find(p => p.slug === req.params.slug)
              || allEnglish.find(p => p.slug === req.params.slug);
   const backUrl = allEnglish.find(p => p.slug === req.params.slug)
@@ -744,7 +513,8 @@ app.get('/about', (req, res) => {
 });
 
 app.get('/contact', (req, res) => {
-  const allPuppies = [...puppies.females, ...puppies.males, ...englishPuppies.females, ...englishPuppies.males];
+  const p = loadPuppies();
+  const allPuppies = [...p.american.females, ...p.american.males, ...p.english.females, ...p.english.males];
   res.render('contact', {
     page: 'contact',
     title: 'Contact Us | Golden Ears Spaniels',
@@ -758,7 +528,8 @@ app.get('/contact', (req, res) => {
 });
 
 app.post('/contact', contactLimiter, async (req, res) => {
-  const allPuppies = [...puppies.females, ...puppies.males, ...englishPuppies.females, ...englishPuppies.males];
+  const p = loadPuppies();
+  const allPuppies = [...p.american.females, ...p.american.males, ...p.english.females, ...p.english.males];
   const { firstName, lastName, email, phone, city, state, puppyOfInterest, message, howHeard } = req.body;
 
   // Basic validation
@@ -921,7 +692,8 @@ app.get('/locations/:slug', (req, res) => {
   const loc = locations.find(l => l.slug === req.params.slug);
   if (!loc) return res.redirect('/locations');
   const others = locations.filter(l => l.slug !== loc.slug);
-  const allPuppies = [...puppies.females, ...puppies.males, ...englishPuppies.females, ...englishPuppies.males];
+  const p = loadPuppies();
+  const allPuppies = [...p.american.females, ...p.american.males, ...p.english.females, ...p.english.males];
   res.render('location', {
     page: 'locations',
     title: `Cocker Spaniel Puppies in ${loc.city}, ${loc.state} | Golden Ears Spaniels`,
@@ -979,6 +751,7 @@ app.get('/admin/logout', (req, res) => {
 app.get('/admin/dashboard', requireAdmin, (req, res) => {
   res.render('admin/dashboard', {
     settings: loadSettings(),
+    puppies: loadPuppies(),
     saved: req.query.saved || null,
   });
 });
@@ -1016,6 +789,25 @@ app.post('/admin/settings/site', requireAdmin, (req, res) => {
   s.site.tagline     = req.body.tagline;
   saveSettings(s);
   res.redirect('/admin/dashboard?saved=site');
+});
+
+// Update puppy details
+app.post('/admin/puppies/:slug', requireAdmin, (req, res) => {
+  const { name, age, price, status } = req.body;
+  const p = loadPuppies();
+  ['american', 'english'].forEach(breed => {
+    ['females', 'males'].forEach(gender => {
+      const idx = p[breed][gender].findIndex(x => x.slug === req.params.slug);
+      if (idx !== -1) {
+        p[breed][gender][idx].name   = name;
+        p[breed][gender][idx].age    = age;
+        p[breed][gender][idx].price  = parseFloat(price) || p[breed][gender][idx].price;
+        p[breed][gender][idx].status = status;
+      }
+    });
+  });
+  savePuppies(p);
+  res.redirect('/admin/dashboard?saved=puppies');
 });
 
 // Change admin password
