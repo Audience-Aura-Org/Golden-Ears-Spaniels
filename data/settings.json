@@ -1,0 +1,22 @@
+{
+  "contact": {
+    "email": "info@goldenearsspaniels.com",
+    "phone_display": "+1 (530) 208-0445",
+    "phone_tel": "+15302080445",
+    "whatsapp": "15302080445",
+    "hours": "Mon–Sun, 9 AM – 6 PM EST",
+    "location_text": "USA · Canada · UK — Worldwide Delivery"
+  },
+  "hero": {
+    "eyebrow": "AKC Registered Since 2019",
+    "headline": "Beautiful Cocker Spaniel Puppies, Raised with Love",
+    "subheadline": "Home-raised, health-tested American Cocker Spaniel puppies with a 2-year guarantee. Delivered safely to your door across the USA & Canada.",
+    "primary_cta": "View Available Puppies",
+    "secondary_cta": "Meet Our Breeders"
+  },
+  "site": {
+    "name": "Golden Ears Spaniels",
+    "description": "Premier AKC Cocker Spaniel breeder since 2019. Home-raised, health-tested puppies delivered to families across the USA, Canada & UK.",
+    "tagline": "AKC Registered · Home Raised · Health Tested"
+  }
+}

@@ -2,10 +2,24 @@ require('dotenv').config();
 const express = require('express');
 const nodemailer = require('nodemailer');
 const rateLimit = require('express-rate-limit');
+const session = require('express-session');
+const bcrypt = require('bcryptjs');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// ─── Settings Helpers ────────────────────────────────────────────────────────
+const SETTINGS_PATH = path.join(__dirname, 'data', 'settings.json');
+const ADMIN_PATH    = path.join(__dirname, 'data', 'admin.json');
+
+function loadSettings() {
+  return JSON.parse(fs.readFileSync(SETTINGS_PATH, 'utf8'));
+}
+function saveSettings(s) {
+  fs.writeFileSync(SETTINGS_PATH, JSON.stringify(s, null, 2));
+}
 
 // ─── Puppy Data ────────────────────────────────────────────────────────────────
 const puppies = {
@@ -517,6 +531,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Serve the image folder (contains puppy photos)
 app.use('/image', express.static(path.join(__dirname, 'image')));
 
+// ─── Session ────────────────────────────────────────────────────────────────
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'ges-admin-secret-2025',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 24 * 60 * 60 * 1000, httpOnly: true },
+}));
+
+// ─── Global Settings Locals ─────────────────────────────────────────────────
+app.use((req, res, next) => {
+  res.locals.settings = loadSettings();
+  next();
+});
+
+// ─── Admin Auth Middleware ───────────────────────────────────────────────────
+function requireAdmin(req, res, next) {
+  if (req.session && req.session.isAdmin) return next();
+  res.redirect('/admin/login');
+}
+
 // Rate limiter for contact form
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -776,6 +810,93 @@ app.get('/reviews', (req, res) => {
     description: 'Read verified 5-star reviews from families across the USA, Canada, and UK who welcomed a Golden Ears Cocker Spaniel puppy into their home.',
     testimonials,
   });
+});
+
+// ─── Admin Routes ──────────────────────────────────────────────────────────────
+app.get('/admin', (req, res) => {
+  res.redirect(req.session.isAdmin ? '/admin/dashboard' : '/admin/login');
+});
+
+app.get('/admin/login', (req, res) => {
+  if (req.session.isAdmin) return res.redirect('/admin/dashboard');
+  res.render('admin/login', { error: null });
+});
+
+app.post('/admin/login', (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const admin = JSON.parse(fs.readFileSync(ADMIN_PATH, 'utf8'));
+    if (email === admin.email && bcrypt.compareSync(password, admin.password_hash)) {
+      req.session.isAdmin = true;
+      return res.redirect('/admin/dashboard');
+    }
+  } catch (e) {}
+  res.render('admin/login', { error: 'Invalid email or password.' });
+});
+
+app.get('/admin/logout', (req, res) => {
+  req.session.destroy(() => res.redirect('/admin/login'));
+});
+
+app.get('/admin/dashboard', requireAdmin, (req, res) => {
+  res.render('admin/dashboard', {
+    settings: loadSettings(),
+    saved: req.query.saved || null,
+  });
+});
+
+// Update contact settings
+app.post('/admin/settings/contact', requireAdmin, (req, res) => {
+  const s = loadSettings();
+  s.contact.email        = req.body.email;
+  s.contact.phone_display = req.body.phone_display;
+  s.contact.phone_tel    = req.body.phone_tel;
+  s.contact.whatsapp     = req.body.whatsapp;
+  s.contact.hours        = req.body.hours;
+  s.contact.location_text = req.body.location_text;
+  saveSettings(s);
+  res.redirect('/admin/dashboard?saved=contact');
+});
+
+// Update hero settings
+app.post('/admin/settings/hero', requireAdmin, (req, res) => {
+  const s = loadSettings();
+  s.hero.eyebrow       = req.body.eyebrow;
+  s.hero.headline      = req.body.headline;
+  s.hero.subheadline   = req.body.subheadline;
+  s.hero.primary_cta   = req.body.primary_cta;
+  s.hero.secondary_cta = req.body.secondary_cta;
+  saveSettings(s);
+  res.redirect('/admin/dashboard?saved=hero');
+});
+
+// Update site info
+app.post('/admin/settings/site', requireAdmin, (req, res) => {
+  const s = loadSettings();
+  s.site.name        = req.body.name;
+  s.site.description = req.body.description;
+  s.site.tagline     = req.body.tagline;
+  saveSettings(s);
+  res.redirect('/admin/dashboard?saved=site');
+});
+
+// Change admin password
+app.post('/admin/settings/password', requireAdmin, (req, res) => {
+  const { current_password, new_password, confirm_password } = req.body;
+  try {
+    const admin = JSON.parse(fs.readFileSync(ADMIN_PATH, 'utf8'));
+    if (!bcrypt.compareSync(current_password, admin.password_hash)) {
+      return res.redirect('/admin/dashboard?saved=password_error');
+    }
+    if (new_password !== confirm_password) {
+      return res.redirect('/admin/dashboard?saved=password_mismatch');
+    }
+    admin.password_hash = bcrypt.hashSync(new_password, 10);
+    fs.writeFileSync(ADMIN_PATH, JSON.stringify(admin, null, 2));
+    res.redirect('/admin/dashboard?saved=password');
+  } catch (e) {
+    res.redirect('/admin/dashboard?saved=password_error');
+  }
 });
 
 // ─── Start Server ──────────────────────────────────────────────────────────────

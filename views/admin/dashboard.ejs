@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Golden Ears Spaniels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin-body">
+
+<!-- ─── Sidebar ─────────────────────────────────────────────────── -->
+<aside class="admin-sidebar">
+  <div class="admin-sidebar-brand">
+    <div class="admin-sidebar-logo">
+      <svg viewBox="0 0 60 60" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+        <ellipse cx="30" cy="43" rx="16" ry="13"/>
+        <ellipse cx="13" cy="29" rx="7" ry="8" transform="rotate(-10 13 29)"/>
+        <ellipse cx="47" cy="29" rx="7" ry="8" transform="rotate(10 47 29)"/>
+        <ellipse cx="21" cy="18" rx="6" ry="7" transform="rotate(-5 21 18)"/>
+        <ellipse cx="39" cy="18" rx="6" ry="7" transform="rotate(5 39 18)"/>
+      </svg>
+    </div>
+    <div>
+      <div class="admin-sidebar-name">Golden Ears</div>
+      <div class="admin-sidebar-role">Admin Panel</div>
+    </div>
+  </div>
+
+  <nav class="admin-nav">
+    <a href="#contact" class="admin-nav-item active" data-section="contact">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.1 2.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.39-1.39a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      Contact Info
+    </a>
+    <a href="#hero" class="admin-nav-item" data-section="hero">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Hero Section
+    </a>
+    <a href="#site" class="admin-nav-item" data-section="site">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      Site Info
+    </a>
+    <a href="#password" class="admin-nav-item" data-section="password">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Change Password
+    </a>
+    <div class="admin-nav-divider"></div>
+    <a href="/" class="admin-nav-item admin-nav-external" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      View Website
+    </a>
+    <a href="/admin/logout" class="admin-nav-item admin-nav-logout">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Logout
+    </a>
+  </nav>
+</aside>
+
+<!-- ─── Main Content ──────────────────────────────────────────────── -->
+<main class="admin-main">
+
+  <div class="admin-topbar">
+    <button class="admin-menu-toggle" id="menuToggle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <h2 class="admin-page-title">Dashboard</h2>
+    <a href="/admin/logout" class="admin-btn-ghost admin-btn-sm">Logout</a>
+  </div>
+
+  <div class="admin-content">
+
+    <!-- Toast notification -->
+    <% if (saved) { %>
+    <div class="admin-toast admin-toast-<%= saved.includes('error') || saved.includes('mismatch') ? 'error' : 'success' %>" id="adminToast">
+      <% if (saved === 'contact') { %>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg>
+        Contact information updated successfully.
+      <% } else if (saved === 'hero') { %>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg>
+        Hero section updated successfully.
+      <% } else if (saved === 'site') { %>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg>
+        Site information updated successfully.
+      <% } else if (saved === 'password') { %>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg>
+        Password changed successfully.
+      <% } else if (saved === 'password_error') { %>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Current password is incorrect.
+      <% } else if (saved === 'password_mismatch') { %>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        New passwords do not match.
+      <% } %>
+    </div>
+    <% } %>
+
+    <!-- ── Contact Info ─────────────────────────────────────────── -->
+    <section class="admin-card" id="contact">
+      <div class="admin-card-head">
+        <div class="admin-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.1 2.18a2 2 0 012-2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.39-1.39a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div>
+          <h3 class="admin-card-title">Contact Information</h3>
+          <p class="admin-card-desc">Displayed in the topbar, footer, and contact page</p>
+        </div>
+      </div>
+      <form action="/admin/settings/contact" method="POST" class="admin-form">
+        <div class="admin-form-grid">
+          <div class="admin-field">
+            <label>Email Address</label>
+            <input type="email" name="email" value="<%= settings.contact.email %>" required>
+            <span class="admin-field-hint">Used in topbar, footer, and contact form replies</span>
+          </div>
+          <div class="admin-field">
+            <label>Phone (Display)</label>
+            <input type="text" name="phone_display" value="<%= settings.contact.phone_display %>" required placeholder="+1 (530) 208-0445">
+            <span class="admin-field-hint">Shown to visitors, e.g. +1 (530) 208-0445</span>
+          </div>
+          <div class="admin-field">
+            <label>Phone (Tel Link)</label>
+            <input type="text" name="phone_tel" value="<%= settings.contact.phone_tel %>" required placeholder="+15302080445">
+            <span class="admin-field-hint">Used in href="tel:..." — no spaces or dashes</span>
+          </div>
+          <div class="admin-field">
+            <label>WhatsApp Number</label>
+            <input type="text" name="whatsapp" value="<%= settings.contact.whatsapp %>" required placeholder="15302080445">
+            <span class="admin-field-hint">Digits only — used in wa.me/... link</span>
+          </div>
+          <div class="admin-field">
+            <label>Business Hours</label>
+            <input type="text" name="hours" value="<%= settings.contact.hours %>" required placeholder="Mon–Sun, 9 AM – 6 PM EST">
+          </div>
+          <div class="admin-field">
+            <label>Location / Delivery Text</label>
+            <input type="text" name="location_text" value="<%= settings.contact.location_text %>" required placeholder="USA · Canada · UK — Worldwide Delivery">
+            <span class="admin-field-hint">Shown below the address pin in footer</span>
+          </div>
+        </div>
+        <div class="admin-form-actions">
+          <button type="submit" class="admin-btn-primary">Save Contact Info</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ── Hero Section ─────────────────────────────────────────── -->
+    <section class="admin-card" id="hero">
+      <div class="admin-card-head">
+        <div class="admin-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div>
+          <h3 class="admin-card-title">Hero Section</h3>
+          <p class="admin-card-desc">The main banner on the homepage</p>
+        </div>
+      </div>
+      <form action="/admin/settings/hero" method="POST" class="admin-form">
+        <div class="admin-form-grid">
+          <div class="admin-field admin-field-full">
+            <label>Eyebrow Tag</label>
+            <input type="text" name="eyebrow" value="<%= settings.hero.eyebrow %>" placeholder="AKC Registered Since 2019">
+            <span class="admin-field-hint">Small label shown above the headline</span>
+          </div>
+          <div class="admin-field admin-field-full">
+            <label>Headline</label>
+            <input type="text" name="headline" value="<%= settings.hero.headline %>" required placeholder="Beautiful Cocker Spaniel Puppies, Raised with Love">
+          </div>
+          <div class="admin-field admin-field-full">
+            <label>Subheadline</label>
+            <textarea name="subheadline" rows="3" placeholder="Supporting description..."><%= settings.hero.subheadline %></textarea>
+          </div>
+          <div class="admin-field">
+            <label>Primary CTA Button</label>
+            <input type="text" name="primary_cta" value="<%= settings.hero.primary_cta %>" placeholder="View Available Puppies">
+          </div>
+          <div class="admin-field">
+            <label>Secondary CTA Button</label>
+            <input type="text" name="secondary_cta" value="<%= settings.hero.secondary_cta %>" placeholder="Meet Our Breeders">
+          </div>
+        </div>
+        <div class="admin-form-actions">
+          <button type="submit" class="admin-btn-primary">Save Hero Section</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ── Site Info ─────────────────────────────────────────────── -->
+    <section class="admin-card" id="site">
+      <div class="admin-card-head">
+        <div class="admin-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <div>
+          <h3 class="admin-card-title">Site Information</h3>
+          <p class="admin-card-desc">Brand name, footer description, and tagline</p>
+        </div>
+      </div>
+      <form action="/admin/settings/site" method="POST" class="admin-form">
+        <div class="admin-form-grid">
+          <div class="admin-field admin-field-full">
+            <label>Business Name</label>
+            <input type="text" name="name" value="<%= settings.site.name %>" required placeholder="Golden Ears Spaniels">
+          </div>
+          <div class="admin-field admin-field-full">
+            <label>Footer Description</label>
+            <textarea name="description" rows="3" placeholder="Short description shown in the footer brand section..."><%= settings.site.description %></textarea>
+          </div>
+          <div class="admin-field admin-field-full">
+            <label>Footer Tagline</label>
+            <input type="text" name="tagline" value="<%= settings.site.tagline %>" placeholder="AKC Registered · Home Raised · Health Tested">
+            <span class="admin-field-hint">Shown in the footer bottom bar</span>
+          </div>
+        </div>
+        <div class="admin-form-actions">
+          <button type="submit" class="admin-btn-primary">Save Site Info</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ── Change Password ───────────────────────────────────────── -->
+    <section class="admin-card" id="password">
+      <div class="admin-card-head">
+        <div class="admin-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <div>
+          <h3 class="admin-card-title">Change Password</h3>
+          <p class="admin-card-desc">Update your admin login password</p>
+        </div>
+      </div>
+      <form action="/admin/settings/password" method="POST" class="admin-form">
+        <div class="admin-form-grid">
+          <div class="admin-field admin-field-full">
+            <label>Current Password</label>
+            <input type="password" name="current_password" required placeholder="••••••••••">
+          </div>
+          <div class="admin-field">
+            <label>New Password</label>
+            <input type="password" name="new_password" required placeholder="••••••••••" minlength="8">
+          </div>
+          <div class="admin-field">
+            <label>Confirm New Password</label>
+            <input type="password" name="confirm_password" required placeholder="••••••••••" minlength="8">
+          </div>
+        </div>
+        <div class="admin-form-actions">
+          <button type="submit" class="admin-btn-primary">Update Password</button>
+        </div>
+      </form>
+    </section>
+
+  </div><!-- /admin-content -->
+</main>
+
+<div class="admin-overlay" id="adminOverlay"></div>
+
+<script>
+  // Mobile sidebar toggle
+  const toggle = document.getElementById('menuToggle');
+  const sidebar = document.querySelector('.admin-sidebar');
+  const overlay = document.getElementById('adminOverlay');
+  toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('visible');
+  });
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('visible');
+  });
+
+  // Auto-dismiss toast after 4 seconds
+  const toast = document.getElementById('adminToast');
+  if (toast) {
+    setTimeout(() => toast.classList.add('hide'), 4000);
+  }
+
+  // Highlight active sidebar nav item based on scroll
+  const sections = document.querySelectorAll('.admin-card[id]');
+  const navItems = document.querySelectorAll('.admin-nav-item[data-section]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navItems.forEach(n => n.classList.remove('active'));
+        const active = document.querySelector(`.admin-nav-item[data-section="${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
