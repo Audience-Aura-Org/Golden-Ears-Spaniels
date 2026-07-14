@@ -64,7 +64,7 @@
         <div class="puppy-card">
           <div class="puppy-card-img-wrap">
             <img src="<%= puppy.image %>" alt="<%= puppy.name %> – <%= puppy.color %> Cocker Spaniel Puppy" loading="lazy">
-            <span class="puppy-card-status"><span class="badge">Available</span></span>
+            <span class="puppy-card-status"><span class="badge<%= (puppy.status||'Available')==='Reserved' ? ' badge-reserved' : (puppy.status||'Available')==='Sold' ? ' badge-sold' : '' %>"><%= puppy.status || 'Available' %></span></span>
             <span class="puppy-card-gender">♀ Female</span>
           </div>
           <div class="puppy-card-body">
@@ -103,7 +103,7 @@
         <div class="puppy-card">
           <div class="puppy-card-img-wrap">
             <img src="<%= puppy.image %>" alt="<%= puppy.name %> – <%= puppy.color %> Cocker Spaniel Puppy" loading="lazy">
-            <span class="puppy-card-status"><span class="badge">Available</span></span>
+            <span class="puppy-card-status"><span class="badge<%= (puppy.status||'Available')==='Reserved' ? ' badge-reserved' : (puppy.status||'Available')==='Sold' ? ' badge-sold' : '' %>"><%= puppy.status || 'Available' %></span></span>
             <span class="puppy-card-gender">♂ Male</span>
           </div>
           <div class="puppy-card-body">

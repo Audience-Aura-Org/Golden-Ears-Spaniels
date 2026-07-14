@@ -25,7 +25,7 @@
       <!-- Info -->
       <div>
         <div class="detail-badges">
-          <span class="badge">Available</span>
+          <span class="badge<%= (puppy.status||'Available')==='Reserved' ? ' badge-reserved' : (puppy.status||'Available')==='Sold' ? ' badge-sold' : '' %>"><%= puppy.status || 'Available' %></span>
           <span class="badge badge-brown"><%= puppy.gender === 'Female' ? '♀ Female' : '♂ Male' %></span>
           <span class="badge-outline badge"><%= puppy.age %></span>
         </div>

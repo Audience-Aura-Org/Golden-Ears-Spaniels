@@ -111,7 +111,7 @@
         <div class="puppy-card">
           <div class="puppy-card-img-wrap">
             <img src="<%= puppy.image %>" alt="<%= puppy.name %> – <%= puppy.color %> American Cocker Spaniel" loading="lazy">
-            <span class="puppy-card-status"><span class="badge">Available</span></span>
+            <span class="puppy-card-status"><span class="badge<%= (puppy.status||'Available')==='Reserved' ? ' badge-reserved' : (puppy.status||'Available')==='Sold' ? ' badge-sold' : '' %>"><%= puppy.status || 'Available' %></span></span>
             <span class="puppy-card-gender"><%= puppy.gender === 'Female' ? '♀ Female' : '♂ Male' %></span>
             <span class="breed-tag-card">🇺🇸 American</span>
           </div>
@@ -143,7 +143,7 @@
         <div class="puppy-card">
           <div class="puppy-card-img-wrap">
             <img src="<%= puppy.image %>" alt="<%= puppy.name %> – <%= puppy.color %> English Cocker Spaniel" loading="lazy">
-            <span class="puppy-card-status"><span class="badge">Available</span></span>
+            <span class="puppy-card-status"><span class="badge<%= (puppy.status||'Available')==='Reserved' ? ' badge-reserved' : (puppy.status||'Available')==='Sold' ? ' badge-sold' : '' %>"><%= puppy.status || 'Available' %></span></span>
             <span class="puppy-card-gender"><%= puppy.gender === 'Female' ? '♀ Female' : '♂ Male' %></span>
             <span class="breed-tag-card" style="background:rgba(0,68,102,.85);">🇬🇧 English</span>
           </div>
