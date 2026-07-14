@@ -260,7 +260,7 @@
             <input type="file" name="image" accept="image/*" class="adm-img-file-input"
               onchange="previewImg(this,'preview-<%= puppy.slug %>')">
           </div>
-          <span class="adm-puppy-status-badge adm-status-<%= puppy.status.toLowerCase().replace(/\s+/g, '-') %>" style="position:relative;top:auto;right:auto;display:inline-block;margin:8px 12px 2px;"><%= puppy.status %></span>
+          <span class="adm-puppy-status-badge adm-status-<%= (puppy.status || 'Available').toLowerCase().replace(/\s+/g, '-') %>" style="position:relative;top:auto;right:auto;display:inline-block;margin:8px 12px 2px;"><%= puppy.status || 'Available' %></span>
           <div class="adm-puppy-color"><%= puppy.color %></div>
           <div style="padding:0 12px 14px;">
             <div class="adm-puppy-row">
@@ -281,9 +281,9 @@
               <div class="adm-puppy-field">
                 <label>Status</label>
                 <select name="status">
-                  <option value="Available" <%= puppy.status === 'Available' ? 'selected' : '' %>>Available</option>
-                  <option value="Reserved"  <%= puppy.status === 'Reserved'  ? 'selected' : '' %>>Reserved</option>
-                  <option value="Sold"      <%= puppy.status === 'Sold'      ? 'selected' : '' %>>Sold</option>
+                  <option value="Available" <%= (puppy.status || 'Available') === 'Available' ? 'selected' : '' %>>Available</option>
+                  <option value="Reserved"  <%= (puppy.status || 'Available') === 'Reserved'  ? 'selected' : '' %>>Reserved</option>
+                  <option value="Sold"      <%= (puppy.status || 'Available') === 'Sold'      ? 'selected' : '' %>>Sold</option>
                 </select>
               </div>
             </div>
@@ -379,7 +379,7 @@
                 <input type="file" name="image" accept="image/*" class="adm-img-file-input"
                   onchange="previewImg(this,'preview-<%= puppy.slug %>')">
               </div>
-              <span class="adm-puppy-status-badge adm-status-<%= puppy.status.toLowerCase().replace(/\s+/g, '-') %>" style="position:relative;top:auto;right:auto;display:inline-block;margin:8px 12px 2px;"><%= puppy.status %></span>
+              <span class="adm-puppy-status-badge adm-status-<%= (puppy.status || 'Available').toLowerCase().replace(/\s+/g, '-') %>" style="position:relative;top:auto;right:auto;display:inline-block;margin:8px 12px 2px;"><%= puppy.status || 'Available' %></span>
               <div class="adm-puppy-color"><%= puppy.color %></div>
               <div style="padding:0 12px 14px;">
                 <div class="adm-puppy-row">
@@ -390,9 +390,9 @@
                   <div class="adm-puppy-field"><label>Price ($)</label><input type="number" name="price" value="<%= puppy.price %>" required min="0"></div>
                   <div class="adm-puppy-field"><label>Status</label>
                     <select name="status">
-                      <option value="Available" <%= puppy.status==='Available'?'selected':'' %>>Available</option>
-                      <option value="Reserved"  <%= puppy.status==='Reserved' ?'selected':'' %>>Reserved</option>
-                      <option value="Sold"      <%= puppy.status==='Sold'     ?'selected':'' %>>Sold</option>
+                      <option value="Available" <%= (puppy.status||'Available')==='Available'?'selected':'' %>>Available</option>
+                      <option value="Reserved"  <%= (puppy.status||'Available')==='Reserved' ?'selected':'' %>>Reserved</option>
+                      <option value="Sold"      <%= (puppy.status||'Available')==='Sold'     ?'selected':'' %>>Sold</option>
                     </select>
                   </div>
                 </div>
@@ -422,7 +422,7 @@
                 <input type="file" name="image" accept="image/*" class="adm-img-file-input"
                   onchange="previewImg(this,'preview-<%= puppy.slug %>')">
               </div>
-              <span class="adm-puppy-status-badge adm-status-<%= puppy.status.toLowerCase().replace(/\s+/g, '-') %>" style="position:relative;top:auto;right:auto;display:inline-block;margin:8px 12px 2px;"><%= puppy.status %></span>
+              <span class="adm-puppy-status-badge adm-status-<%= (puppy.status || 'Available').toLowerCase().replace(/\s+/g, '-') %>" style="position:relative;top:auto;right:auto;display:inline-block;margin:8px 12px 2px;"><%= puppy.status || 'Available' %></span>
               <div class="adm-puppy-color"><%= puppy.color %></div>
               <div style="padding:0 12px 14px;">
                 <div class="adm-puppy-row">
@@ -433,9 +433,9 @@
                   <div class="adm-puppy-field"><label>Price ($)</label><input type="number" name="price" value="<%= puppy.price %>" required min="0"></div>
                   <div class="adm-puppy-field"><label>Status</label>
                     <select name="status">
-                      <option value="Available" <%= puppy.status==='Available'?'selected':'' %>>Available</option>
-                      <option value="Reserved"  <%= puppy.status==='Reserved' ?'selected':'' %>>Reserved</option>
-                      <option value="Sold"      <%= puppy.status==='Sold'     ?'selected':'' %>>Sold</option>
+                      <option value="Available" <%= (puppy.status||'Available')==='Available'?'selected':'' %>>Available</option>
+                      <option value="Reserved"  <%= (puppy.status||'Available')==='Reserved' ?'selected':'' %>>Reserved</option>
+                      <option value="Sold"      <%= (puppy.status||'Available')==='Sold'     ?'selected':'' %>>Sold</option>
                     </select>
                   </div>
                 </div>
@@ -530,7 +530,7 @@
                 <input type="file" name="image" accept="image/*" class="adm-img-file-input"
                   onchange="previewImg(this,'preview-<%= puppy.slug %>')">
               </div>
-              <span class="adm-puppy-status-badge adm-status-<%= puppy.status.toLowerCase().replace(/\s+/g, '-') %>" style="position:relative;top:auto;right:auto;display:inline-block;margin:8px 12px 2px;"><%= puppy.status %></span>
+              <span class="adm-puppy-status-badge adm-status-<%= (puppy.status || 'Available').toLowerCase().replace(/\s+/g, '-') %>" style="position:relative;top:auto;right:auto;display:inline-block;margin:8px 12px 2px;"><%= puppy.status || 'Available' %></span>
               <div class="adm-puppy-color"><%= puppy.color %></div>
               <div style="padding:0 12px 14px;">
                 <div class="adm-puppy-row">
@@ -541,9 +541,9 @@
                   <div class="adm-puppy-field"><label>Price ($)</label><input type="number" name="price" value="<%= puppy.price %>" required min="0"></div>
                   <div class="adm-puppy-field"><label>Status</label>
                     <select name="status">
-                      <option value="Available" <%= puppy.status==='Available'?'selected':'' %>>Available</option>
-                      <option value="Reserved"  <%= puppy.status==='Reserved' ?'selected':'' %>>Reserved</option>
-                      <option value="Sold"      <%= puppy.status==='Sold'     ?'selected':'' %>>Sold</option>
+                      <option value="Available" <%= (puppy.status||'Available')==='Available'?'selected':'' %>>Available</option>
+                      <option value="Reserved"  <%= (puppy.status||'Available')==='Reserved' ?'selected':'' %>>Reserved</option>
+                      <option value="Sold"      <%= (puppy.status||'Available')==='Sold'     ?'selected':'' %>>Sold</option>
                     </select>
                   </div>
                 </div>
@@ -573,7 +573,7 @@
                 <input type="file" name="image" accept="image/*" class="adm-img-file-input"
                   onchange="previewImg(this,'preview-<%= puppy.slug %>')">
               </div>
-              <span class="adm-puppy-status-badge adm-status-<%= puppy.status.toLowerCase().replace(/\s+/g, '-') %>" style="position:relative;top:auto;right:auto;display:inline-block;margin:8px 12px 2px;"><%= puppy.status %></span>
+              <span class="adm-puppy-status-badge adm-status-<%= (puppy.status || 'Available').toLowerCase().replace(/\s+/g, '-') %>" style="position:relative;top:auto;right:auto;display:inline-block;margin:8px 12px 2px;"><%= puppy.status || 'Available' %></span>
               <div class="adm-puppy-color"><%= puppy.color %></div>
               <div style="padding:0 12px 14px;">
                 <div class="adm-puppy-row">
@@ -584,9 +584,9 @@
                   <div class="adm-puppy-field"><label>Price ($)</label><input type="number" name="price" value="<%= puppy.price %>" required min="0"></div>
                   <div class="adm-puppy-field"><label>Status</label>
                     <select name="status">
-                      <option value="Available" <%= puppy.status==='Available'?'selected':'' %>>Available</option>
-                      <option value="Reserved"  <%= puppy.status==='Reserved' ?'selected':'' %>>Reserved</option>
-                      <option value="Sold"      <%= puppy.status==='Sold'     ?'selected':'' %>>Sold</option>
+                      <option value="Available" <%= (puppy.status||'Available')==='Available'?'selected':'' %>>Available</option>
+                      <option value="Reserved"  <%= (puppy.status||'Available')==='Reserved' ?'selected':'' %>>Reserved</option>
+                      <option value="Sold"      <%= (puppy.status||'Available')==='Sold'     ?'selected':'' %>>Sold</option>
                     </select>
                   </div>
                 </div>

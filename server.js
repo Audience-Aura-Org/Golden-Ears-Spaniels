@@ -853,13 +853,12 @@ app.post('/admin/puppies/:slug', requireAdmin, upload.single('image'), (req, res
     ['females', 'males'].forEach(gender => {
       const idx = p[breed][gender].findIndex(x => x.slug === req.params.slug);
       if (idx !== -1) {
-        p[breed][gender][idx].name   = name;
-        p[breed][gender][idx].age    = age;
-        p[breed][gender][idx].price  = parseFloat(price) || p[breed][gender][idx].price;
-        p[breed][gender][idx].status = status;
-        if (req.file) {
-          p[breed][gender][idx].image = '/image/' + req.file.filename;
-        }
+        const cur = p[breed][gender][idx];
+        cur.name   = name   || cur.name;
+        cur.age    = age    || cur.age;
+        cur.price  = parseFloat(price) || cur.price;
+        cur.status = status || cur.status || 'Available';
+        if (req.file) cur.image = '/image/' + req.file.filename;
       }
     });
   });
