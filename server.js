@@ -448,7 +448,7 @@ app.get('/', (req, res) => {
   const p = loadPuppies();
   const featuredFemales = p.american.females.slice(0, 2);
   const featuredMales   = p.american.males.slice(0, 2);
-  const featuredEnglish = [...p.english.females.slice(0, 1), ...p.english.males.slice(0, 1)];
+  const featuredEnglish = [...p.english.females.slice(0, 2), ...p.english.males.slice(0, 2)];
   res.render('index', {
     page: 'home',
     title: 'Golden Ears Spaniels | American & English Cocker Spaniel Puppies',
