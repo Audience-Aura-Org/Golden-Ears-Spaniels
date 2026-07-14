@@ -30,7 +30,7 @@
 </section>
 
 <!-- ─── Aggregate Rating ──────────────────────────────────────────── -->
-<section class="section" style="background:var(--white); padding:36px 0;">
+<section class="section section-payment" style="background:var(--white);">
   <div class="container">
     <div class="reviews-aggregate">
       <div class="reviews-score">
@@ -68,7 +68,7 @@
        return false;
      }); %>
 <%   if (countryReviews.length > 0) { %>
-<section class="section" style="background:<%= country === 'Canada' ? 'var(--cream)' : country === 'UK' ? 'var(--white)' : country === 'Ireland' ? 'var(--cream)' : 'var(--cream)' %>; padding-top:48px; padding-bottom:48px;">
+<section class="section reviews-country-section" style="background:<%= country === 'Canada' ? 'var(--cream)' : country === 'UK' ? 'var(--white)' : country === 'Ireland' ? 'var(--cream)' : 'var(--cream)' %>; ">
   <div class="container">
     <div class="reviews-country-head">
       <span class="reviews-country-flag">
