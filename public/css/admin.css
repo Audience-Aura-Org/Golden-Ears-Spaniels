@@ -782,3 +782,7 @@ body { font-family: 'Poppins', system-ui, sans-serif; background: var(--adm-bg);
   .adm-puppy-panel { padding: 16px; }
   .adm-puppy-tabs { padding: 0 16px 16px; }
 }
+
+@media (max-width: 480px) {
+  .adm-puppy-grid { grid-template-columns: 1fr; }
+}

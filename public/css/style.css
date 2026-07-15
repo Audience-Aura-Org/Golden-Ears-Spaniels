@@ -1246,7 +1246,7 @@ select.form-control {
 
 /* ── WhatsApp sticky button ── */
 .whatsapp-float {
-  position: fixed; bottom: 26px; right: 26px; z-index: 998;
+  position: fixed; bottom: 26px; left: 26px; z-index: 998;
   width: 56px; height: 56px;
   background: #25D366;
   border-radius: 50%;
@@ -1764,7 +1764,7 @@ select.form-control {
   .why-grid, .delivery-grid, .credentials-grid, .locations-grid, .city-photo-grid { grid-template-columns: 1fr; }
   .puppies-grid-4    { grid-template-columns: 1fr; }
   .steps-grid        { grid-template-columns: 1fr; }
-  .whatsapp-float    { width: 50px; height: 50px; bottom: 20px; right: 20px; }
+  .whatsapp-float    { width: 50px; height: 50px; bottom: 20px; left: 20px; }
   .page-stats { gap: 12px; }
   .page-stat  { padding: 0 14px; }
   .page-stat-num { font-size: 1.55rem; }
