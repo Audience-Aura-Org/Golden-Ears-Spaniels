@@ -2,7 +2,7 @@
   "american": {
     "females": [
       {
-        "name": "Joy",
+        "name": "Joy m",
         "slug": "joy",
         "breed": "American Cocker Spaniel",
         "gender": "Female",
@@ -28,7 +28,7 @@
         "gender": "Female",
         "age": "11 weeks",
         "price": 1100,
-        "status": "Available",
+        "status": "Reserved",
         "color": "Black & White Parti",
         "markings": "Classic black and white parti-color pattern",
         "description": "Playful, curious, and people-oriented. Chica thrives on attention and bonding. She follows you everywhere and has an endearing personality that makes her impossible to resist.",
