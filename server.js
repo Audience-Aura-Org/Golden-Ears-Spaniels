@@ -847,17 +847,20 @@ app.post('/admin/puppies/:slug/delete', requireAdmin, (req, res) => {
 
 // Update puppy details (with optional image)
 app.post('/admin/puppies/:slug', requireAdmin, upload.single('image'), (req, res) => {
-  const { name, age, price, status } = req.body;
+  const { name, age, price, status, color, markings, description } = req.body;
   const p = loadPuppies();
   ['american', 'english'].forEach(breed => {
     ['females', 'males'].forEach(gender => {
       const idx = p[breed][gender].findIndex(x => x.slug === req.params.slug);
       if (idx !== -1) {
         const cur = p[breed][gender][idx];
-        cur.name   = name   || cur.name;
-        cur.age    = age    || cur.age;
-        cur.price  = parseFloat(price) || cur.price;
-        cur.status = status || cur.status || 'Available';
+        cur.name        = name        || cur.name;
+        cur.age         = age         || cur.age;
+        cur.price       = parseFloat(price) || cur.price;
+        cur.status      = status      || cur.status || 'Available';
+        cur.color       = color       || cur.color;
+        cur.markings    = markings    || cur.markings;
+        cur.description = description || cur.description;
         if (req.file) cur.image = '/image/' + req.file.filename;
       }
     });

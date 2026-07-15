@@ -83,6 +83,16 @@
         <span></span><span></span><span></span>
       </button>
     </div>
+    <script>
+      (function(){
+        var items = document.querySelectorAll('.has-dropdown');
+        items.forEach(function(li){
+          var t;
+          li.addEventListener('mouseenter', function(){ clearTimeout(t); li.classList.add('dd-open'); });
+          li.addEventListener('mouseleave', function(){ t = setTimeout(function(){ li.classList.remove('dd-open'); }, 220); });
+        });
+      })();
+    </script>
 
     <nav class="mobile-menu">
       <a href="/"                  class="<%= page==='home'      ? 'active':'' %>">Home</a>

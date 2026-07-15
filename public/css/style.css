@@ -266,7 +266,7 @@ h4 { font-size: clamp(.95rem, 2.2vw, 1.05rem); }
 .has-dropdown:hover .nav-chevron { transform: rotate(180deg); }
 .nav-dropdown {
   position: absolute;
-  top: calc(100% + 14px);
+  top: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%);
   background: #fff;
@@ -282,7 +282,8 @@ h4 { font-size: clamp(.95rem, 2.2vw, 1.05rem); }
   transition: opacity .2s, transform .2s;
   z-index: 500;
 }
-.has-dropdown:hover .nav-dropdown {
+.has-dropdown:hover .nav-dropdown,
+.has-dropdown.dd-open .nav-dropdown {
   opacity: 1;
   pointer-events: auto;
   transform: translateX(-50%) translateY(0);
@@ -1609,6 +1610,14 @@ select.form-control {
   .footer h5              { text-align: center; }
   .footer-bottom          { flex-direction: column; text-align: center; }
 
+  /* Puppy card — stack footer earlier on tablet for readability */
+  .puppies-grid { grid-template-columns: repeat(2,1fr); }
+  .puppy-card-footer { flex-direction: column; align-items: flex-start; }
+  .puppy-card-footer .btn { width: 100%; }
+
+  /* Detail image — avoid overly tall on tablet */
+  .detail-img { max-height: 420px; }
+
   /* Mobile content centering */
   .hero-content           { text-align: center; }
   .hero-eyebrow           { justify-content: center; }
@@ -1672,6 +1681,12 @@ select.form-control {
   /* Detail */
   .detail-name  { font-size: 1.65rem; }
   .detail-price { font-size: 1.5rem; }
+  .detail-img   { max-height: 320px; }
+  .detail-actions .btn { width: 100%; justify-content: center; }
+
+  /* Puppy listing top-bar filter */
+  .puppies-topbar { flex-direction: column; align-items: stretch; gap: 10px; }
+  .puppies-topbar-filters { justify-content: center; }
 
   /* Footer */
   .footer { padding: 40px 0 22px; }

@@ -287,6 +287,20 @@
                 </select>
               </div>
             </div>
+            <div class="adm-puppy-row">
+              <div class="adm-puppy-field">
+                <label>Color</label>
+                <input type="text" name="color" value="<%= puppy.color || '' %>">
+              </div>
+              <div class="adm-puppy-field">
+                <label>Markings</label>
+                <input type="text" name="markings" value="<%= puppy.markings || '' %>">
+              </div>
+            </div>
+            <div class="adm-puppy-field" style="margin-bottom:10px;">
+              <label>Description</label>
+              <textarea name="description" rows="3" style="width:100%;resize:vertical;font-size:.83rem;padding:7px 9px;border:1px solid #ddd;border-radius:6px;font-family:inherit;line-height:1.5;"><%= puppy.description || '' %></textarea>
+            </div>
             <button type="submit" class="adm-puppy-save">Save Changes</button>
           </div>
         </form>
@@ -396,6 +410,14 @@
                     </select>
                   </div>
                 </div>
+                <div class="adm-puppy-row">
+                  <div class="adm-puppy-field"><label>Color</label><input type="text" name="color" value="<%= puppy.color || '' %>"></div>
+                  <div class="adm-puppy-field"><label>Markings</label><input type="text" name="markings" value="<%= puppy.markings || '' %>"></div>
+                </div>
+                <div class="adm-puppy-field" style="margin-bottom:10px;">
+                  <label>Description</label>
+                  <textarea name="description" rows="3" style="width:100%;resize:vertical;font-size:.83rem;padding:7px 9px;border:1px solid #ddd;border-radius:6px;font-family:inherit;line-height:1.5;"><%= puppy.description || '' %></textarea>
+                </div>
                 <button type="submit" class="adm-puppy-save">Save Changes</button>
               </div>
             </form>
@@ -438,6 +460,14 @@
                       <option value="Sold"      <%= (puppy.status||'Available')==='Sold'     ?'selected':'' %>>Sold</option>
                     </select>
                   </div>
+                </div>
+                <div class="adm-puppy-row">
+                  <div class="adm-puppy-field"><label>Color</label><input type="text" name="color" value="<%= puppy.color || '' %>"></div>
+                  <div class="adm-puppy-field"><label>Markings</label><input type="text" name="markings" value="<%= puppy.markings || '' %>"></div>
+                </div>
+                <div class="adm-puppy-field" style="margin-bottom:10px;">
+                  <label>Description</label>
+                  <textarea name="description" rows="3" style="width:100%;resize:vertical;font-size:.83rem;padding:7px 9px;border:1px solid #ddd;border-radius:6px;font-family:inherit;line-height:1.5;"><%= puppy.description || '' %></textarea>
                 </div>
                 <button type="submit" class="adm-puppy-save">Save Changes</button>
               </div>
@@ -547,6 +577,14 @@
                     </select>
                   </div>
                 </div>
+                <div class="adm-puppy-row">
+                  <div class="adm-puppy-field"><label>Color</label><input type="text" name="color" value="<%= puppy.color || '' %>"></div>
+                  <div class="adm-puppy-field"><label>Markings</label><input type="text" name="markings" value="<%= puppy.markings || '' %>"></div>
+                </div>
+                <div class="adm-puppy-field" style="margin-bottom:10px;">
+                  <label>Description</label>
+                  <textarea name="description" rows="3" style="width:100%;resize:vertical;font-size:.83rem;padding:7px 9px;border:1px solid #ddd;border-radius:6px;font-family:inherit;line-height:1.5;"><%= puppy.description || '' %></textarea>
+                </div>
                 <button type="submit" class="adm-puppy-save">Save Changes</button>
               </div>
             </form>
@@ -589,6 +627,14 @@
                       <option value="Sold"      <%= (puppy.status||'Available')==='Sold'     ?'selected':'' %>>Sold</option>
                     </select>
                   </div>
+                </div>
+                <div class="adm-puppy-row">
+                  <div class="adm-puppy-field"><label>Color</label><input type="text" name="color" value="<%= puppy.color || '' %>"></div>
+                  <div class="adm-puppy-field"><label>Markings</label><input type="text" name="markings" value="<%= puppy.markings || '' %>"></div>
+                </div>
+                <div class="adm-puppy-field" style="margin-bottom:10px;">
+                  <label>Description</label>
+                  <textarea name="description" rows="3" style="width:100%;resize:vertical;font-size:.83rem;padding:7px 9px;border:1px solid #ddd;border-radius:6px;font-family:inherit;line-height:1.5;"><%= puppy.description || '' %></textarea>
                 </div>
                 <button type="submit" class="adm-puppy-save">Save Changes</button>
               </div>
