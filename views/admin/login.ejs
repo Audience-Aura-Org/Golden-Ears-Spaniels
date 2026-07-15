@@ -6,17 +6,18 @@
   <title>Admin Login — Golden Ears Spaniels</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body class="admin-login-body">
 
-  <div class="admin-login-wrap">
-    <div class="admin-login-card">
+  <div class="login-split">
 
-      <div class="admin-login-brand">
-        <div class="admin-login-logo">
-          <svg viewBox="0 0 60 60" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="38" height="38">
+    <!-- ── Left brand panel ── -->
+    <div class="login-brand">
+      <div class="login-brand-inner">
+        <div class="login-brand-logo">
+          <svg viewBox="0 0 60 60" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
             <ellipse cx="30" cy="43" rx="16" ry="13"/>
             <ellipse cx="13" cy="29" rx="7" ry="8" transform="rotate(-10 13 29)"/>
             <ellipse cx="47" cy="29" rx="7" ry="8" transform="rotate(10 47 29)"/>
@@ -24,33 +25,81 @@
             <ellipse cx="39" cy="18" rx="6" ry="7" transform="rotate(5 39 18)"/>
           </svg>
         </div>
-        <div>
-          <h1 class="admin-login-title">Golden Ears</h1>
-          <p class="admin-login-sub">Admin Dashboard</p>
-        </div>
+        <h1 class="login-brand-name">Golden Ears<br>Spaniels</h1>
+        <p class="login-brand-tag">Admin Control Panel</p>
+
+        <ul class="login-brand-features">
+          <li>
+            <span class="login-feat-icon">🐾</span>
+            <span>Manage puppies &amp; listings</span>
+          </li>
+          <li>
+            <span class="login-feat-icon">📸</span>
+            <span>Upload &amp; update photos</span>
+          </li>
+          <li>
+            <span class="login-feat-icon">✉️</span>
+            <span>View contact inquiries</span>
+          </li>
+          <li>
+            <span class="login-feat-icon">⚙️</span>
+            <span>Site settings &amp; content</span>
+          </li>
+        </ul>
+
+        <div class="login-brand-footer">goldenearsspaniels.com</div>
       </div>
-
-      <% if (error) { %>
-      <div class="admin-alert admin-alert-error">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <%= error %>
-      </div>
-      <% } %>
-
-      <form action="/admin/login" method="POST" class="admin-form">
-        <div class="admin-field">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="admin@example.com" required autocomplete="email">
-        </div>
-        <div class="admin-field">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="••••••••••" required autocomplete="current-password">
-        </div>
-        <button type="submit" class="admin-btn-primary admin-btn-full">Sign In</button>
-      </form>
-
-      <a href="/" class="admin-back-link">← Back to website</a>
     </div>
+
+    <!-- ── Right form panel ── -->
+    <div class="login-form-wrap">
+      <div class="login-form-card">
+
+        <div class="login-form-header">
+          <div class="login-form-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <div>
+            <h2 class="login-form-title">Welcome back</h2>
+            <p class="login-form-sub">Sign in to your admin account</p>
+          </div>
+        </div>
+
+        <% if (error) { %>
+        <div class="admin-alert admin-alert-error" style="margin-bottom:20px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <%= error %>
+        </div>
+        <% } %>
+
+        <form action="/admin/login" method="POST" class="login-form">
+          <div class="login-field">
+            <label for="email">Email Address</label>
+            <div class="login-input-wrap">
+              <svg class="login-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" id="email" name="email" placeholder="info@goldenearsspaniels.com" required autocomplete="email">
+            </div>
+          </div>
+          <div class="login-field">
+            <label for="password">Password</label>
+            <div class="login-input-wrap">
+              <svg class="login-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              <input type="password" id="password" name="password" placeholder="••••••••••" required autocomplete="current-password">
+            </div>
+          </div>
+          <button type="submit" class="login-submit">
+            Sign In
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </form>
+
+        <a href="/" class="login-back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to website
+        </a>
+      </div>
+    </div>
+
   </div>
 
 </body>

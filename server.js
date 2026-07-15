@@ -483,10 +483,12 @@ app.get('/available-puppies', (req, res) => {
   const p = loadPuppies();
   res.render('puppies', {
     page: 'puppies',
-    title: 'Available American Cocker Spaniel Puppies | Golden Ears Spaniels',
-    description: 'Browse our available AKC American Cocker Spaniel puppies. Males and females, multiple colors, all health-tested with a 2-year guarantee.',
-    females: p.american.females,
-    males: p.american.males,
+    title: 'Available Puppies — American & English Cocker Spaniels | Golden Ears Spaniels',
+    description: 'Browse all available Cocker Spaniel puppies — AKC American and KC English breeds. Health-tested, vaccinated, and ready for forever families.',
+    americanFemales: p.american.females,
+    americanMales:   p.american.males,
+    englishFemales:  p.english.females,
+    englishMales:    p.english.males,
   });
 });
 
